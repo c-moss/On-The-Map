@@ -15,6 +15,10 @@
 		935C448B1CD5644E002D5DED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 935C44891CD5644E002D5DED /* LaunchScreen.storyboard */; };
 		935C44931CD56875002D5DED /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935C44921CD56875002D5DED /* MapKit.framework */; };
 		935C44951CD6F227002D5DED /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44941CD6F227002D5DED /* LoginViewController.swift */; };
+		935C449D1CD700E8002D5DED /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C449C1CD700E8002D5DED /* UdacityClient.swift */; };
+		935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C449E1CD7052E002D5DED /* UdacityConstants.swift */; };
+		935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A01CD70DDE002D5DED /* ServiceClient.swift */; };
+		935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A21CD70E85002D5DED /* UdacitySession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		935C448C1CD5644E002D5DED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		935C44921CD56875002D5DED /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		935C44941CD6F227002D5DED /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		935C449C1CD700E8002D5DED /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		935C449E1CD7052E002D5DED /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
+		935C44A01CD70DDE002D5DED /* ServiceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClient.swift; sourceTree = "<group>"; };
+		935C44A21CD70E85002D5DED /* UdacitySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacitySession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 		935C447D1CD5644E002D5DED /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				935C44991CD7005F002D5DED /* Model */,
 				935C447E1CD5644E002D5DED /* AppDelegate.swift */,
 				935C44981CD6FEAB002D5DED /* Supporting Files */,
 				935C44971CD6FE57002D5DED /* Controller */,
@@ -96,6 +105,33 @@
 				935C448C1CD5644E002D5DED /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		935C44991CD7005F002D5DED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				935C449A1CD70078002D5DED /* Client */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		935C449A1CD70078002D5DED /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				935C44A01CD70DDE002D5DED /* ServiceClient.swift */,
+				935C449B1CD70081002D5DED /* Udacity */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		935C449B1CD70081002D5DED /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+				935C449C1CD700E8002D5DED /* UdacityClient.swift */,
+				935C449E1CD7052E002D5DED /* UdacityConstants.swift */,
+				935C44A21CD70E85002D5DED /* UdacitySession.swift */,
+			);
+			name = Udacity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,10 +205,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */,
+				935C449D1CD700E8002D5DED /* UdacityClient.swift in Sources */,
 				935C44831CD5644E002D5DED /* TableViewController.swift in Sources */,
 				935C44951CD6F227002D5DED /* LoginViewController.swift in Sources */,
 				935C447F1CD5644E002D5DED /* AppDelegate.swift in Sources */,
 				935C44811CD5644E002D5DED /* MapViewController.swift in Sources */,
+				935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */,
+				935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
