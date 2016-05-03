@@ -31,19 +31,20 @@ class UdacitySession : NSObject {
     }
 
     
-    class func convertDataWithCompletionHandler(data: [String:AnyObject], completion: (result: UdacitySession?, error: NSError?) -> Void) {
+    class func convertDataWithCompletionHandler(data: AnyObject, completion: (sessionModel: UdacitySession?, error: NSError?) -> Void) {
         let session: sessionType
         let account: accountType
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "2015-05-10T16:48:30.760460Z"
-        "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z.'S"
+
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'S'Z'"
+        
         if let accountData = data[UdacityClient.JSONResponseKeys.PostSession.Account] as? [String:AnyObject],
             let accountRegistered = accountData[UdacityClient.JSONResponseKeys.PostSession.AccountRegistered] as? Bool,
             let accountKey = accountData[UdacityClient.JSONResponseKeys.PostSession.AccountKey] as? String {
                 account = UdacitySession.accountType(registered: accountRegistered, key: accountKey)
         } else {
-            completion(result: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing account data"))
+            completion(sessionModel: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing account data"))
             return
         }
         
@@ -53,10 +54,10 @@ class UdacitySession : NSObject {
             let sessionExpiration = dateFormatter.dateFromString(sessionExpirationString) {
                 session = UdacitySession.sessionType(id: sessionID, expiration: sessionExpiration)
         } else {
-            completion(result: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing session data"))
+            completion(sessionModel: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing session data"))
             return
         }
         
-        completion(result: UdacitySession(account: account, session: session), error: nil)
+        completion(sessionModel: UdacitySession(account: account, session: session), error: nil)
     }
 }

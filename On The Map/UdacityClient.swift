@@ -48,12 +48,12 @@ class UdacityClient : ServiceClient {
                 return
             }
             
-            guard result != nil else {
+            guard let result = result else {
                 completion(result: nil, error: ServiceClient.createError("createSession", error: "Result was nil"))
                 return
             }
-            
-            print("Result: \(result)")
+
+            UdacitySession.convertDataWithCompletionHandler(result,completion: completion)
         }
         
     }

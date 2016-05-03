@@ -49,19 +49,21 @@ class ServiceClient : NSObject {
                 }
                 return
             }
-            
+
             guard let data = data else {
                 ServiceClient.sendError("No data was returned by the request!", completion: completion)
                 return
             }
             
-            let parsedResult: AnyObject!
+            let strippedData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
             
+            let parsedResult: AnyObject!
+
             do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(strippedData, options: .AllowFragments)
             } catch {
                 parsedResult = nil
-                ServiceClient.sendError("Could not parse the data as JSON: '\(data)'", completion: completion)
+                ServiceClient.sendError("Could not parse the data as JSON: \(data)", completion: completion)
                 return
             }
             

@@ -22,7 +22,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginPressed(sender: UIButton) {
         UdacityClient.sharedInstance().createSession("campbell.moss@gmail.com", password: "monkeybrains") { (result, error) in
-            print("There was error sir: \(error)")
+            if error != nil {
+                print("There was error sir: \(error)")
+                return //TODO: Display error to user
+            }
+            
+            guard let result = result else {
+                print("No result returned")
+                return
+            }
+            
+            print("Success!: \(result)")
+            
         }
         //performSegueWithIdentifier("login", sender: self)
     }

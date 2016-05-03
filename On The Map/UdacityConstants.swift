@@ -41,9 +41,4 @@ extension UdacityClient {
             static let SessionExpiration = "expiration"
         }
     }
-    
-    enum UdacityClientError: ErrorType {
-        case ParsingError
-    }
-    
 }
