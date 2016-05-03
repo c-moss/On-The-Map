@@ -8,7 +8,11 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
+    
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +25,19 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginPressed(sender: UIButton) {
-        UdacityClient.sharedInstance().createSession("campbell.moss@gmail.com", password: "monkeybrains") { (result, error) in
+        let username = usernameField.text
+        let password = passwordField.text
+        guard hasData(username) && hasData(password) else {
+            showErrorAlert("Invalid credentials", message: "Please enter username and password")
+            return
+        }
+        
+        UdacityClient.sharedInstance().createSession(username!, password: password!) { (result, error) in
             if error != nil {
-                print("There was error sir: \(error)")
-                return //TODO: Display error to user
+                print(error)
+                self.showErrorAlert(message: "There was an error logging in. Please try again")
+                //TODO: differentiate between incorrect credentials and other errors
+                return
             }
             
             guard let result = result else {

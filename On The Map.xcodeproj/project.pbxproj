@@ -19,6 +19,7 @@
 		935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C449E1CD7052E002D5DED /* UdacityConstants.swift */; };
 		935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A01CD70DDE002D5DED /* ServiceClient.swift */; };
 		935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A21CD70E85002D5DED /* UdacitySession.swift */; };
+		935C44A51CD8722D002D5DED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A41CD8722D002D5DED /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		935C449E1CD7052E002D5DED /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		935C44A01CD70DDE002D5DED /* ServiceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClient.swift; sourceTree = "<group>"; };
 		935C44A21CD70E85002D5DED /* UdacitySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacitySession.swift; sourceTree = "<group>"; };
+		935C44A41CD8722D002D5DED /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				935C44981CD6FEAB002D5DED /* Supporting Files */,
 				935C44971CD6FE57002D5DED /* Controller */,
 				935C44961CD6FE47002D5DED /* Assets */,
+				935C44A41CD8722D002D5DED /* BaseViewController.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				935C44831CD5644E002D5DED /* TableViewController.swift in Sources */,
 				935C44951CD6F227002D5DED /* LoginViewController.swift in Sources */,
 				935C447F1CD5644E002D5DED /* AppDelegate.swift in Sources */,
+				935C44A51CD8722D002D5DED /* BaseViewController.swift in Sources */,
 				935C44811CD5644E002D5DED /* MapViewController.swift in Sources */,
 				935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */,
 				935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */,
