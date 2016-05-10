@@ -13,8 +13,30 @@ class ServiceClient : NSObject {
     // shared session
     var session = NSURLSession.sharedSession()
     
+    // MARK: Shared Instance
+    class func sharedInstance() -> UdacityClient {
+        struct Singleton {
+            static var sharedInstance = UdacityClient()
+        }
+        return Singleton.sharedInstance
+    }
+    
     class func sendError(error: Error, completion: (result: AnyObject?, error: Error) -> Void) {
         completion(result: nil, error: error)
+    }
+    
+    class func urlFromParameters(scheme: String, host: String, path: String, parameters: [String:String], withPathExtension: String? = nil) -> NSURL {
+        
+        let components = NSURLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.path = path + (withPathExtension ?? "")
+        if parameters.count > 0 {
+            components.queryItems = [NSURLQueryItem]()
+            components.queryItems = parameters.map() { NSURLQueryItem(name: $0, value: $1)}
+        }
+        
+        return components.URL!
     }
     
     func sendHTTPRequestWithCallback(URL: NSURL, body: String?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {

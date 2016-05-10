@@ -10,28 +10,9 @@ import Foundation
 
 class UdacityClient : ServiceClient {
     
-    // MARK: Shared Instance
-    
-    class func sharedInstance() -> UdacityClient {
-        struct Singleton {
-            static var sharedInstance = UdacityClient()
-        }
-        return Singleton.sharedInstance
-    }
-    
     // create a URL from parameters
     class func udacityURLFromParameters(parameters: [String:String], withPathExtension: String? = nil) -> NSURL {
-        
-        let components = NSURLComponents()
-        components.scheme = Constants.ApiScheme
-        components.host = Constants.ApiHost
-        components.path = Constants.ApiPath + (withPathExtension ?? "")
-        if parameters.count > 0 {
-            components.queryItems = [NSURLQueryItem]()
-            components.queryItems = parameters.map() { NSURLQueryItem(name: $0, value: $1)}
-        }
-        
-        return components.URL!
+        return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
     }
     
     func createSession(username: String, password: String, completion: (result: UdacitySession?, error: Error?) -> Void) {
