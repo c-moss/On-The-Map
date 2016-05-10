@@ -31,7 +31,7 @@ class UdacitySession : NSObject {
     }
 
     
-    class func convertDataWithCompletionHandler(data: AnyObject, completion: (sessionModel: UdacitySession?, error: NSError?) -> Void) {
+    class func convertDataWithCompletionHandler(data: AnyObject, completion: (sessionModel: UdacitySession?, error: Error?) -> Void) {
         let session: sessionType
         let account: accountType
         
@@ -44,7 +44,7 @@ class UdacitySession : NSObject {
             let accountKey = accountData[UdacityClient.JSONResponseKeys.PostSession.AccountKey] as? String {
                 account = UdacitySession.accountType(registered: accountRegistered, key: accountKey)
         } else {
-            completion(sessionModel: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing account data"))
+            completion(sessionModel: nil, error: Error(message: "Error parsing account data"))
             return
         }
         
@@ -54,7 +54,7 @@ class UdacitySession : NSObject {
             let sessionExpiration = dateFormatter.dateFromString(sessionExpirationString) {
                 session = UdacitySession.sessionType(id: sessionID, expiration: sessionExpiration)
         } else {
-            completion(sessionModel: nil, error: ServiceClient.createError("UdacitySession.convertDataWithCompletionHandler", error: "Error parsing session data"))
+            completion(sessionModel: nil, error: Error(message: "Error parsing session data"))
             return
         }
         

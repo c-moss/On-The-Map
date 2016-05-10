@@ -20,6 +20,7 @@
 		935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A01CD70DDE002D5DED /* ServiceClient.swift */; };
 		935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A21CD70E85002D5DED /* UdacitySession.swift */; };
 		935C44A51CD8722D002D5DED /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A41CD8722D002D5DED /* BaseViewController.swift */; };
+		935C44A71CE19FC0002D5DED /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44A61CE19FC0002D5DED /* Error.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		935C44A01CD70DDE002D5DED /* ServiceClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceClient.swift; sourceTree = "<group>"; };
 		935C44A21CD70E85002D5DED /* UdacitySession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacitySession.swift; sourceTree = "<group>"; };
 		935C44A41CD8722D002D5DED /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		935C44A61CE19FC0002D5DED /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				935C449A1CD70078002D5DED /* Client */,
+				935C44A61CE19FC0002D5DED /* Error.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				935C44A51CD8722D002D5DED /* BaseViewController.swift in Sources */,
 				935C44811CD5644E002D5DED /* MapViewController.swift in Sources */,
 				935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */,
+				935C44A71CE19FC0002D5DED /* Error.swift in Sources */,
 				935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

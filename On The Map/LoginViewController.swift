@@ -34,9 +34,19 @@ class LoginViewController: BaseViewController {
         
         UdacityClient.sharedInstance().createSession(username!, password: password!) { (result, error) in
             if error != nil {
-                print(error)
-                self.showErrorAlert(message: "There was an error logging in. Please try again")
-                //TODO: differentiate between incorrect credentials and other errors
+                if let statusCode = (error as? HTTPError)?.code {
+                    switch statusCode {
+                    case 403:
+                        self.showErrorAlert(message: "Incorrect username or password supplied - please try again")
+                        break
+                    default:
+                        print(error)
+                        self.showErrorAlert(message: "There was an error logging in. Please try again")
+                    }
+                } else {
+                    print(error)
+                    self.showErrorAlert(message: "There was an error logging in. Please try again")
+                }
                 return
             }
             
