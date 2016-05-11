@@ -55,7 +55,23 @@ class LoginViewController: BaseViewController {
                 return
             }
             
-            print("Success!: \(result)")
+            print("Created session!: \(result)")
+            
+            ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                if error != nil {
+                    print(error)
+                    //TODO: handle this error better - kick back to login screen?
+                    self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
+                    return
+                }
+                
+                guard let result = result else {
+                    print("No result returned")
+                    return
+                }
+                
+                print("Got student location data!: \(result)")
+            }
             
         }
         //performSegueWithIdentifier("login", sender: self)

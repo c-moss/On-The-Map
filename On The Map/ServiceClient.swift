@@ -13,14 +13,6 @@ class ServiceClient : NSObject {
     // shared session
     var session = NSURLSession.sharedSession()
     
-    // MARK: Shared Instance
-    class func sharedInstance() -> UdacityClient {
-        struct Singleton {
-            static var sharedInstance = UdacityClient()
-        }
-        return Singleton.sharedInstance
-    }
-    
     class func sendError(error: Error, completion: (result: AnyObject?, error: Error) -> Void) {
         completion(result: nil, error: error)
     }
@@ -39,8 +31,14 @@ class ServiceClient : NSObject {
         return components.URL!
     }
     
-    func sendHTTPRequestWithCallback(URL: NSURL, body: String?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
+    func sendHTTPRequestWithCallback(URL: NSURL, body: String?=nil, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
         let request = NSMutableURLRequest(URL: URL)
+
+        if let headers = headers {
+            for header in headers {
+                request.addValue(header.1, forHTTPHeaderField: header.0)
+            }
+        }
         
         if let body = body {    // if a body has been supplied, assume that this a POST request
             request.HTTPMethod = "POST"
@@ -67,20 +65,25 @@ class ServiceClient : NSObject {
                 return
             }
 
-            guard let data = data else {
+            guard var data = data else {
                 ServiceClient.sendError(Error(message: "No data was returned by the request!"), completion: completion)
                 return
             }
             
-            let strippedData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+            // Check that the first byte is an opening curly brace - if not, we might be handling a response from the Udacity API, which has a "security feature" that requires us to strip the first 5 bytes from the response
+            var firstByte: Character = "{"
+            data.getBytes(&firstByte, length: 1)
+            if firstByte != "{" {
+                data = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+            }
             
             let parsedResult: AnyObject!
 
             do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(strippedData, options: .AllowFragments)
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             } catch {
                 parsedResult = nil
-                ServiceClient.sendError(Error(message: "Could not parse the data as JSON: \(data)"), completion: completion)
+                ServiceClient.sendError(Error(message: "Could not parse the data as JSON: \(String(data: data, encoding: NSUTF8StringEncoding))"), completion: completion)
                 return
             }
             

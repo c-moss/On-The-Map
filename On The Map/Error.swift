@@ -8,11 +8,15 @@
 
 import Foundation
 
-class Error {
+class Error: CustomStringConvertible {
     var message: String
     
     init(message: String) {
         self.message = message
+    }
+    
+    var description: String {
+        return self.message
     }
 }
 
@@ -23,6 +27,10 @@ class HTTPError: Error {
         self.code = code
         super.init(message: message)
     }
+    
+    override var description: String {
+        return "\(self.code): \(self.message)"
+    }
 }
 
 class GeneralError: Error {
@@ -30,5 +38,9 @@ class GeneralError: Error {
     init(message: String, error: NSError) {
         self.error = error
         super.init(message: message)
+    }
+    
+    override var description: String {
+        return "\(self.error.localizedDescription): \(self.message)"
     }
 }

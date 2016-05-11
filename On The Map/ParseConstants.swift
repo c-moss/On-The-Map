@@ -35,6 +35,7 @@ extension ParseClient {
         
         // MARK: GET StudentLocation
         struct GetStudentLocation {
+            static let results : String = "results"
             static let objectId : String = "objectId"
             static let uniqueKey : String = "uniqueKey"
             static let firstName : String = "firstName"

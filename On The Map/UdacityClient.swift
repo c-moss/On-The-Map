@@ -10,6 +10,14 @@ import Foundation
 
 class UdacityClient : ServiceClient {
     
+    // MARK: Shared Instance
+    class func sharedInstance() -> UdacityClient {
+        struct Singleton {
+            static var sharedInstance = UdacityClient()
+        }
+        return Singleton.sharedInstance
+    }
+    
     // create a URL from parameters
     class func udacityURLFromParameters(parameters: [String:String], withPathExtension: String? = nil) -> NSURL {
         return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
