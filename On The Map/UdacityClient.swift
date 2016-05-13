@@ -38,12 +38,17 @@ class UdacityClient : ServiceClient {
                 return
             }
             
-            guard let result = result else {
+            guard let resultDict = result as? [String:AnyObject] else {
                 completion(result: nil, error: Error(message: "Result was nil"))
                 return
             }
-
-            UdacitySession.convertDataWithCompletionHandler(result,completion: completion)
+            
+            do {
+                let session = try UdacitySession(data: resultDict)
+                completion(result: session, error: nil)
+            } catch {
+                completion(result: nil, error: Error(message: "Error parsing Udacity session data"))
+            }
         }
     }
 }

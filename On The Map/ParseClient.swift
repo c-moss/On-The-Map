@@ -23,7 +23,7 @@ class ParseClient : ServiceClient {
         return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
     }
     
-    func getStudentLocations(completion: (result: [ParseStudentLocation]?, error: Error?) -> Void) {
+    func getStudentLocations(completion: (result: [StudentInformation]?, error: Error?) -> Void) {
         let methodParameters = ["limit":"100"]
         let url = ParseClient.parseURLFromParameters(methodParameters, withPathExtension: Methods.StudentLocation)
                 
@@ -43,7 +43,17 @@ class ParseClient : ServiceClient {
                 return
             }
             
-            ParseStudentLocation.convertDataWithCompletionHandler(result,completion: completion)
+            guard let resultArray = result[ParseClient.JSONResponseKeys.GetStudentLocation.results] as? [[String:AnyObject]] else {
+                completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
+                return
+            }
+            
+            do {
+                let studentLocations = try resultArray.map() {try StudentInformation(data: $0)}
+                completion(result: studentLocations, error: nil)
+            } catch {
+                completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
+            }
         }
     }
 }
