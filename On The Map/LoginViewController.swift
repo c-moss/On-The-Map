@@ -55,7 +55,7 @@ class LoginViewController: BaseViewController {
                 return
             }
             
-            print("Created session!: \(result)")
+            Model.sharedInstance().sessionData = result
             
             ParseClient.sharedInstance().getStudentLocations() { (result, error) in
                 if error != nil {
@@ -71,11 +71,14 @@ class LoginViewController: BaseViewController {
                     return
                 }
                 
-                print("Got student location data!: \(result)")
+                Model.sharedInstance().studentInformationData = result
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.performSegueWithIdentifier("login", sender: self)
+                }
+
             }
-            
         }
-        //performSegueWithIdentifier("login", sender: self)
     }
     
 }

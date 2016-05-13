@@ -25,6 +25,7 @@
 		935C44AC1CE1A95F002D5DED /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AB1CE1A95F002D5DED /* ParseConstants.swift */; };
 		935C44AE1CE2A4D9002D5DED /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AD1CE2A4D9002D5DED /* StudentInformation.swift */; };
 		935C44B01CE6763C002D5DED /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AF1CE6763C002D5DED /* ParseError.swift */; };
+		935C44B21CE67850002D5DED /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B11CE67850002D5DED /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		935C44AB1CE1A95F002D5DED /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		935C44AD1CE2A4D9002D5DED /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		935C44AF1CE6763C002D5DED /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseError.swift; sourceTree = "<group>"; };
+		935C44B11CE67850002D5DED /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				935C449A1CD70078002D5DED /* Client */,
 				935C44A61CE19FC0002D5DED /* Error.swift */,
+				935C44B11CE67850002D5DED /* Model.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				935C44B21CE67850002D5DED /* Model.swift in Sources */,
 				935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */,
 				935C449D1CD700E8002D5DED /* UdacityClient.swift in Sources */,
 				935C44831CD5644E002D5DED /* TableViewController.swift in Sources */,
