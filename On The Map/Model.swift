@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Singleton used to cache retrieved web service data
+*/
 class Model : NSObject {
     
     // MARK: Shared Instance

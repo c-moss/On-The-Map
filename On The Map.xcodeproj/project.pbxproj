@@ -89,7 +89,6 @@
 				935C44981CD6FEAB002D5DED /* Supporting Files */,
 				935C44971CD6FE57002D5DED /* Controller */,
 				935C44961CD6FE47002D5DED /* Assets */,
-				935C44A41CD8722D002D5DED /* BaseViewController.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -107,6 +106,7 @@
 		935C44971CD6FE57002D5DED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				935C44A41CD8722D002D5DED /* BaseViewController.swift */,
 				935C44801CD5644E002D5DED /* MapViewController.swift */,
 				935C44821CD5644E002D5DED /* TableViewController.swift */,
 				935C44941CD6F227002D5DED /* LoginViewController.swift */,
