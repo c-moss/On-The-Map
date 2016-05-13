@@ -67,6 +67,7 @@ class LoginViewController: BaseViewController {
                 
                 guard let result = result else {
                     print("No result returned")
+                    self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
                     return
                 }
                 

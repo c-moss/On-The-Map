@@ -23,13 +23,13 @@ class ParseClient : ServiceClient {
         return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
     }
     
-    //TODO: only get first 100 locations or something
     func getStudentLocations(completion: (result: [ParseStudentLocation]?, error: Error?) -> Void) {
-        let methodParameters = [String:String]()
+        let methodParameters = ["limit":"100"]
         let url = ParseClient.parseURLFromParameters(methodParameters, withPathExtension: Methods.StudentLocation)
                 
         //TODO: tidy up
-        print("Getting \(url)")
+        //print("Getting \(url)")
+        
         let headers = ["X-Parse-Application-Id":Constants.ApplicationID, "X-Parse-REST-API-Key":Constants.ApiKey]
         
         sendHTTPRequestWithCallback(url, headers: headers) { (result, error) in
