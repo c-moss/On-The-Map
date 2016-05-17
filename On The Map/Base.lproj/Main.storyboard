@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Map-->
@@ -53,7 +54,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentInformationTableViewCell" id="1sw-gi-S0I">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1sw-gi-S0I" id="R1B-T6-dBL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -119,17 +120,24 @@
                     <connections>
                         <outlet property="passwordField" destination="U8t-ZZ-qwB" id="t9o-GZ-KLi"/>
                         <outlet property="usernameField" destination="nMN-iZ-OR0" id="6lk-Qe-dhE"/>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="login" id="0ni-Vz-jAq"/>
+                        <segue destination="y6Z-km-obe" kind="presentation" identifier="login" id="M6Z-uG-TRe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JP4-te-poM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-833" y="-2"/>
+            <point key="canvasLocation" x="-1666" y="0.0"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--On The Map-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController extendedLayoutIncludesOpaqueBars="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="On The Map" id="JfV-S0-ZCk">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="cPF-Rk-vZf"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="C5M-0O-KHn"/>
+                            <barButtonItem image="pin" id="vLP-gk-se0"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -145,9 +153,26 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xja-eq-uhm">
+            <objects>
+                <navigationController id="y6Z-km-obe" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lcU-nr-nay">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="relationship" relationship="rootViewController" id="HoP-eP-prf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0dK-O1-msI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-796" y="0.0"/>
+        </scene>
     </scenes>
     <resources>
         <image name="list" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
+        <image name="pin" width="32" height="32"/>
     </resources>
 </document>
