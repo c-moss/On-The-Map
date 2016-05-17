@@ -27,6 +27,8 @@
 		935C44B01CE6763C002D5DED /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AF1CE6763C002D5DED /* ParseError.swift */; };
 		935C44B21CE67850002D5DED /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B11CE67850002D5DED /* Model.swift */; };
 		935C44B41CEABA9C002D5DED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B31CEABA9C002D5DED /* MainTabBarController.swift */; };
+		935C44B61CEAD34C002D5DED /* PostLocationMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B51CEAD34C002D5DED /* PostLocationMasterViewController.swift */; };
+		935C44BA1CEAE39D002D5DED /* PostLocationFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B91CEAE39D002D5DED /* PostLocationFirstViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		935C44AF1CE6763C002D5DED /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseError.swift; sourceTree = "<group>"; };
 		935C44B11CE67850002D5DED /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		935C44B31CEABA9C002D5DED /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		935C44B51CEAD34C002D5DED /* PostLocationMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLocationMasterViewController.swift; sourceTree = "<group>"; };
+		935C44B91CEAE39D002D5DED /* PostLocationFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLocationFirstViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				935C44821CD5644E002D5DED /* TableViewController.swift */,
 				935C44941CD6F227002D5DED /* LoginViewController.swift */,
 				935C44B31CEABA9C002D5DED /* MainTabBarController.swift */,
+				935C44B51CEAD34C002D5DED /* PostLocationMasterViewController.swift */,
+				935C44B91CEAE39D002D5DED /* PostLocationFirstViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -240,12 +246,14 @@
 				935C44B21CE67850002D5DED /* Model.swift in Sources */,
 				935C44A11CD70DDE002D5DED /* ServiceClient.swift in Sources */,
 				935C449D1CD700E8002D5DED /* UdacityClient.swift in Sources */,
+				935C44B61CEAD34C002D5DED /* PostLocationMasterViewController.swift in Sources */,
 				935C44831CD5644E002D5DED /* TableViewController.swift in Sources */,
 				935C44951CD6F227002D5DED /* LoginViewController.swift in Sources */,
 				935C447F1CD5644E002D5DED /* AppDelegate.swift in Sources */,
 				935C44A51CD8722D002D5DED /* BaseViewController.swift in Sources */,
 				935C44811CD5644E002D5DED /* MapViewController.swift in Sources */,
 				935C44AE1CE2A4D9002D5DED /* StudentInformation.swift in Sources */,
+				935C44BA1CEAE39D002D5DED /* PostLocationFirstViewController.swift in Sources */,
 				935C44B01CE6763C002D5DED /* ParseError.swift in Sources */,
 				935C44B41CEABA9C002D5DED /* MainTabBarController.swift in Sources */,
 				935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */,
@@ -400,6 +408,7 @@
 				935C44911CD5644E002D5DED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
