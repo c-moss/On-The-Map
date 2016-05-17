@@ -21,6 +21,11 @@ class TableViewController: BaseViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.reloadData()
+    }
+    
+    override func reloadData() {
+        studentInformationData = Model.sharedInstance().studentInformationData!
         studentTableView.reloadData()
     }
 

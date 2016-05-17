@@ -25,4 +25,8 @@ class BaseViewController: UIViewController {
         return (str == nil) ? false: str!.characters.count > 0
     }
     
+    func reloadData() {
+        //to be overridden by subclasses
+    }
+    
 }
