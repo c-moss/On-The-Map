@@ -120,7 +120,7 @@
                     <connections>
                         <outlet property="passwordField" destination="U8t-ZZ-qwB" id="t9o-GZ-KLi"/>
                         <outlet property="usernameField" destination="nMN-iZ-OR0" id="6lk-Qe-dhE"/>
-                        <segue destination="y6Z-km-obe" kind="presentation" identifier="login" id="M6Z-uG-TRe"/>
+                        <segue destination="y6Z-km-obe" kind="show" identifier="login" animates="NO" id="M6Z-uG-TRe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JP4-te-poM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -130,11 +130,19 @@
         <!--On The Map-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController extendedLayoutIncludesOpaqueBars="YES" id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController extendedLayoutIncludesOpaqueBars="YES" id="49e-Tb-3d3" customClass="MainTabBarController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="JfV-S0-ZCk">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="cPF-Rk-vZf"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="cPF-Rk-vZf">
+                            <connections>
+                                <segue destination="MAK-MS-elJ" kind="unwind" unwindAction="logout:" id="FCX-5R-8Zy"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="C5M-0O-KHn"/>
+                            <barButtonItem systemItem="refresh" id="C5M-0O-KHn">
+                                <connections>
+                                    <action selector="refreshClicked:" destination="49e-Tb-3d3" id="Sc1-9c-IcP"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="pin" id="vLP-gk-se0"/>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -150,6 +158,7 @@
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+                <exit id="MAK-MS-elJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>

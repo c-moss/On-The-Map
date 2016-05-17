@@ -32,7 +32,7 @@ class UdacityClient : ServiceClient {
         //TODO: tidy up
         //print("Sending \(body) to \(url)")
         
-        sendHTTPRequestWithCallback(url, body: body) { (result, error) in
+        sendHTTPPOSTWithCallback(url, body: body) { (result, error) in
             guard error == nil else {
                 completion(result: nil, error: error)
                 return
@@ -47,8 +47,34 @@ class UdacityClient : ServiceClient {
                 let session = try UdacitySession(data: resultDict)
                 completion(result: session, error: nil)
             } catch {
-                completion(result: nil, error: Error(message: "Error parsing Udacity session data"))
+                completion(result: nil, error: Error(message: "Error parsing Udacity session data \(resultDict)"))
             }
+        }
+    }
+    
+    func deleteSession(completion: (result: UdacitySession?, error: Error?) -> Void) {
+        let methodParameters = [String:String]()
+        var headers = [String:String]()
+
+        let url = UdacityClient.udacityURLFromParameters(methodParameters, withPathExtension: Methods.Session)
+        
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            headers["X-XSRF-TOKEN"] = xsrfCookie.value
+        }
+        
+        sendHTTPDELETEWithCallback(url, headers: headers) { (result, error) in
+            guard error == nil else {
+                completion(result: nil, error: error)
+                return
+            }
+            
+            //We don't really care what the result was, as long as we didn't get an error
+            completion(result: nil, error: nil)
         }
     }
 }

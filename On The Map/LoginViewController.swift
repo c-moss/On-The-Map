@@ -81,4 +81,22 @@ class LoginViewController: BaseViewController {
         }
     }
     
+    private func resetForm() {
+        usernameField.text = nil
+        passwordField.text = nil
+    }
+    
+    @IBAction func logout(segue:UIStoryboardSegue) {
+        resetForm()
+        Model.sharedInstance().sessionData = nil
+
+        UdacityClient.sharedInstance().deleteSession() { (result, error) in
+            if error != nil {
+                print(error)
+                self.showErrorAlert(message: "There was an error logging out")
+                return
+            }
+        }
+    }
+    
 }

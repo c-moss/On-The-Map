@@ -31,8 +31,28 @@ class ServiceClient : NSObject {
         return components.URL!
     }
     
-    func sendHTTPRequestWithCallback(URL: NSURL, body: String?=nil, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
+    func sendHTTPGETWithCallback(URL: NSURL, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
+        self.sendHTTPRequestWithCallback(URL, method: "GET", headers: headers, completion: completion)
+    }
+    
+    func sendHTTPPOSTWithCallback(URL: NSURL, headers: [String:String]?=nil, body: String, completion: (result: AnyObject?, error: Error?) -> Void) {
+        var postHeaders = [String:String]()
+        if (headers != nil) {  //set content type headers for JSON
+            postHeaders = headers!
+        }
+        postHeaders["Accept"] = "application/json"
+        postHeaders["Content-Type"] = "application/json"
+        self.sendHTTPRequestWithCallback(URL, method: "POST", headers: postHeaders, body: body, completion: completion)
+    }
+    
+    func sendHTTPDELETEWithCallback(URL: NSURL, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
+        self.sendHTTPRequestWithCallback(URL, method: "DELETE", headers: headers, completion: completion)
+    }
+    
+    func sendHTTPRequestWithCallback(URL: NSURL, method: String, body: String?=nil, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
         let request = NSMutableURLRequest(URL: URL)
+        
+        request.HTTPMethod = method
 
         if let headers = headers {
             for header in headers {
@@ -41,10 +61,6 @@ class ServiceClient : NSObject {
         }
         
         if let body = body {    // if a body has been supplied, assume that this a POST request
-            request.HTTPMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Accept")
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            
             request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
         }
         
@@ -56,17 +72,17 @@ class ServiceClient : NSObject {
             }
             
             guard let response = response as? NSHTTPURLResponse else {
-                ServiceClient.sendError(Error(message: "Your request returned an invalid response!"), completion: completion)
+                ServiceClient.sendError(Error(message: "Your request \(method) \(URL) returned an invalid response!"), completion: completion)
                 return
             }
             
             guard response.statusCode >= 200 && response.statusCode <= 299 else {
-                ServiceClient.sendError(HTTPError(message: "Your request returned a status code other than 2xx!", code: response.statusCode), completion: completion)
+                ServiceClient.sendError(HTTPError(message: "Your request \(method) \(URL) returned a status code other than 2xx!", code: response.statusCode), completion: completion)
                 return
             }
 
             guard var data = data else {
-                ServiceClient.sendError(Error(message: "No data was returned by the request!"), completion: completion)
+                ServiceClient.sendError(Error(message: "No data was returned by the request \(method) \(URL)!"), completion: completion)
                 return
             }
             

@@ -26,6 +26,7 @@
 		935C44AE1CE2A4D9002D5DED /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AD1CE2A4D9002D5DED /* StudentInformation.swift */; };
 		935C44B01CE6763C002D5DED /* ParseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44AF1CE6763C002D5DED /* ParseError.swift */; };
 		935C44B21CE67850002D5DED /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B11CE67850002D5DED /* Model.swift */; };
+		935C44B41CEABA9C002D5DED /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935C44B31CEABA9C002D5DED /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		935C44AD1CE2A4D9002D5DED /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		935C44AF1CE6763C002D5DED /* ParseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseError.swift; sourceTree = "<group>"; };
 		935C44B11CE67850002D5DED /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		935C44B31CEABA9C002D5DED /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				935C44801CD5644E002D5DED /* MapViewController.swift */,
 				935C44821CD5644E002D5DED /* TableViewController.swift */,
 				935C44941CD6F227002D5DED /* LoginViewController.swift */,
+				935C44B31CEABA9C002D5DED /* MainTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				935C44811CD5644E002D5DED /* MapViewController.swift in Sources */,
 				935C44AE1CE2A4D9002D5DED /* StudentInformation.swift in Sources */,
 				935C44B01CE6763C002D5DED /* ParseError.swift in Sources */,
+				935C44B41CEABA9C002D5DED /* MainTabBarController.swift in Sources */,
 				935C44A31CD70E85002D5DED /* UdacitySession.swift in Sources */,
 				935C44A71CE19FC0002D5DED /* Error.swift in Sources */,
 				935C449F1CD7052E002D5DED /* UdacityConstants.swift in Sources */,

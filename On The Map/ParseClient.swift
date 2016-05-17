@@ -32,7 +32,7 @@ class ParseClient : ServiceClient {
         
         let headers = ["X-Parse-Application-Id":Constants.ApplicationID, "X-Parse-REST-API-Key":Constants.ApiKey]
         
-        sendHTTPRequestWithCallback(url, headers: headers) { (result, error) in
+        sendHTTPGETWithCallback(url, headers: headers) { (result, error) in
             guard error == nil else {
                 completion(result: nil, error: error)
                 return
