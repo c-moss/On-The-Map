@@ -1,5 +1,5 @@
 //
-//  PostLocationFirstViewController.swift
+//  PostLocationViewController.swift
 //  On The Map
 //
 //  Created by Campbell Moss on 17/05/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostLocationFirstViewController: BaseViewController, UITextViewDelegate {
+class PostLocationViewController: BaseViewController, UITextViewDelegate {
     
     @IBOutlet weak var findButton: UIButton!
     
@@ -28,5 +28,5 @@ class PostLocationFirstViewController: BaseViewController, UITextViewDelegate {
     func textViewDidEndEditing(textView: UITextView) {
         locationPlaceholder.hidden = textView.hasText()
     }
-
+    
 }
