@@ -32,7 +32,9 @@ class LoginViewController: BaseViewController {
             return
         }
         
+        showLoadingIndicator()
         UdacityClient.sharedInstance().createSession(username!, password: password!) { (result, error) in
+            self.hideLoadingIndicator()
             if error != nil {
                 if let statusCode = (error as? HTTPError)?.code {
                     switch statusCode {
@@ -57,7 +59,9 @@ class LoginViewController: BaseViewController {
             
             Model.sharedInstance().sessionData = result
             
+            self.showLoadingIndicator()
             ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                self.hideLoadingIndicator()
                 if error != nil {
                     print(error)
                     //TODO: handle this error better - kick back to login screen?

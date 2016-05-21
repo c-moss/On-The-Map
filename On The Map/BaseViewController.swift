@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    
     func showErrorAlert(title: String? = "Error", message: String) {
         dispatch_async(dispatch_get_main_queue()) {
             let errorAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -21,12 +24,30 @@ class BaseViewController: UIViewController {
         }
     }
     
+    // Utility function for checking that a string is both non-nil and non-empty
     func hasData(str: String?) -> Bool {
         return (str == nil) ? false: str!.characters.count > 0
     }
     
+    // Reloads the data displayed by this controller. 
+    //TODO: move to subclass for List and Map views
     func reloadData() {
         //to be overridden by subclasses
     }
+    
+    func showLoadingIndicator() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.spinner.center = self.view.center
+            self.spinner.startAnimating()
+            self.view.addSubview(self.spinner)
+        }
+    }
+    
+    func hideLoadingIndicator() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.spinner.removeFromSuperview()
+        }
+    }
+    
     
 }
