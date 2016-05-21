@@ -222,7 +222,23 @@
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-c8-uA3">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Please enter a link" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Lee-qL-spn">
+                                                <rect key="frame" x="35" y="75" width="530" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="ucT-tJ-Aag"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.2470588235" green="0.4549019608" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Lee-qL-spn" firstAttribute="leading" secondItem="gIU-c8-uA3" secondAttribute="leading" constant="35" id="6cV-Il-pzY"/>
+                                            <constraint firstItem="Lee-qL-spn" firstAttribute="centerY" secondItem="gIU-c8-uA3" secondAttribute="centerY" id="RRm-LR-T1E"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lee-qL-spn" secondAttribute="trailing" constant="35" id="VMB-Ae-Ebp"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -275,9 +291,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LocationDetailView" destination="Wde-MV-yrx" id="hNC-zS-Rik"/>
-                        <outlet property="LocationEntryView" destination="CQi-2y-C5Y" id="arb-1s-sBi"/>
                         <outlet property="findButton" destination="5lk-N3-J0X" id="94U-dJ-urj"/>
+                        <outlet property="linkTextView" destination="Lee-qL-spn" id="VYf-jY-ufs"/>
+                        <outlet property="locationDetailView" destination="Wde-MV-yrx" id="oYJ-ev-BCA"/>
+                        <outlet property="locationEntryView" destination="CQi-2y-C5Y" id="Iyg-nE-kVf"/>
                         <outlet property="locationPlaceholder" destination="bNa-1K-wWP" id="sgd-s6-J2Z"/>
                         <outlet property="locationTextView" destination="G3z-uf-ADB" id="mgp-4m-Gwh"/>
                         <outlet property="mapView" destination="qcs-fs-pzc" id="ZLa-5j-n7C"/>
