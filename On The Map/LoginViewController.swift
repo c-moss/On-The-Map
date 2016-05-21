@@ -12,7 +12,7 @@ class LoginViewController: BaseViewController {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +32,18 @@ class LoginViewController: BaseViewController {
             return
         }
         
-        showLoadingIndicator()
+        enterLoadingState {
+            self.usernameField.enabled = false
+            self.passwordField.enabled = false
+            self.loginButton.enabled = false
+        }
+        
         UdacityClient.sharedInstance().createSession(username!, password: password!) { (result, error) in
-            self.hideLoadingIndicator()
+            self.exitLoadingState {
+                self.usernameField.enabled = true
+                self.passwordField.enabled = true
+                self.loginButton.enabled = true
+            }
             if error != nil {
                 if let statusCode = (error as? HTTPError)?.code {
                     switch statusCode {
@@ -59,9 +68,17 @@ class LoginViewController: BaseViewController {
             
             Model.sharedInstance().sessionData = result
             
-            self.showLoadingIndicator()
+            self.enterLoadingState {
+                self.usernameField.enabled = false
+                self.passwordField.enabled = false
+                self.loginButton.enabled = false
+            }
             ParseClient.sharedInstance().getStudentLocations() { (result, error) in
-                self.hideLoadingIndicator()
+                self.exitLoadingState {
+                    self.usernameField.enabled = true
+                    self.passwordField.enabled = true
+                    self.loginButton.enabled = true
+                }
                 if error != nil {
                     print(error)
                     //TODO: handle this error better - kick back to login screen?

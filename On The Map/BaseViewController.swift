@@ -29,25 +29,38 @@ class BaseViewController: UIViewController {
         return (str == nil) ? false: str!.characters.count > 0
     }
     
-    // Reloads the data displayed by this controller. 
-    //TODO: move to subclass for List and Map views
-    func reloadData() {
-        //to be overridden by subclasses
-    }
+//    func showLoadingIndicator() {
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.spinner.center = self.view.center
+//            self.spinner.startAnimating()
+//            self.view.addSubview(self.spinner)
+//        }
+//    }
+//    
+//    func hideLoadingIndicator() {
+//        dispatch_async(dispatch_get_main_queue()) {
+//            self.spinner.removeFromSuperview()
+//        }
+//    }
     
-    func showLoadingIndicator() {
+    func enterLoadingState(tasks: () -> Void) {
         dispatch_async(dispatch_get_main_queue()) {
             self.spinner.center = self.view.center
             self.spinner.startAnimating()
             self.view.addSubview(self.spinner)
+            tasks()
         }
     }
     
-    func hideLoadingIndicator() {
+    func exitLoadingState(tasks: () -> Void) {
         dispatch_async(dispatch_get_main_queue()) {
+            tasks()
             self.spinner.removeFromSuperview()
         }
     }
-    
-    
+}
+
+protocol DataViewController {
+    // Reloads the data displayed by this controller.
+    func reloadData()
 }

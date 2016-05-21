@@ -51,8 +51,17 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         let mapSearchRequest = MKLocalSearchRequest()
         mapSearchRequest.naturalLanguageQuery = searchQuery
         
+        enterLoadingState {
+            self.locationTextView.editable = false
+            self.submitButton.enabled = false
+        }
+        
         let mapSearch = MKLocalSearch(request: mapSearchRequest)
         mapSearch.startWithCompletionHandler { (response, error) in
+            self.exitLoadingState {
+                self.locationTextView.editable = true
+                self.submitButton.enabled = true
+            }
             guard error == nil else {
                 print("Map search error: \(error)")
                 self.showErrorAlert(message: "Could not complete location search - please try again")
@@ -71,10 +80,12 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                 return
             }
             
-            self.pinMapAndZoom(response.mapItems[0])
+            dispatch_async(dispatch_get_main_queue()) {
+                self.pinMapAndZoom(response.mapItems[0])
+                self.locationEntryView.hidden = true
+                self.locationDetailView.hidden = false
+                }
         }
-        locationEntryView.hidden = true
-        locationDetailView.hidden = false
     }
     
     // Add an annotation pin to the mapView and zoom to show that pin

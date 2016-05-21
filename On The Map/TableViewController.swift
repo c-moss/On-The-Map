@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: BaseViewController {
+class TableViewController: BaseViewController, DataViewController {
     
     var studentInformationData = Model.sharedInstance().studentInformationData!
     
@@ -24,7 +24,7 @@ class TableViewController: BaseViewController {
         self.reloadData()
     }
     
-    override func reloadData() {
+    func reloadData() {
         studentInformationData = Model.sharedInstance().studentInformationData!
         studentTableView.reloadData()
     }

@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController {
                 }
                 
                 Model.sharedInstance().studentInformationData = result
-                currentView.reloadData()
+                (currentView as! DataViewController).reloadData()
             }
         }
     }

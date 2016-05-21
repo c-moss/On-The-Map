@@ -9,14 +9,14 @@
 import UIKit
 import MapKit
 
-class MapViewController: BaseViewController {
+class MapViewController: BaseViewController, DataViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func reloadData() {
+    func reloadData() {
         showErrorAlert(message: "MapViewController.reloadData()")
     }
 

@@ -338,6 +338,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="vrz-nt-MLz" id="mig-el-8gF"/>
                         <outlet property="passwordField" destination="U8t-ZZ-qwB" id="t9o-GZ-KLi"/>
                         <outlet property="usernameField" destination="nMN-iZ-OR0" id="6lk-Qe-dhE"/>
                         <segue destination="y6Z-km-obe" kind="show" identifier="login" animates="NO" id="M6Z-uG-TRe"/>
