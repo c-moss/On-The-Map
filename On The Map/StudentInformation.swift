@@ -10,7 +10,7 @@ import Foundation
 
 struct StudentInformation {
     
-    var objectId: String
+    var objectId: String?
     var uniqueKey: String
     var firstName: String
     var lastName: String
@@ -18,8 +18,8 @@ struct StudentInformation {
     var mediaURL: String
     var latitude: Float
     var longitude: Float
-    var createdAt: NSDate
-    var updatedAt: NSDate
+    var createdAt: NSDate?
+    var updatedAt: NSDate?
     
     init(data: [String:AnyObject]) throws {
         let dateFormatter = NSDateFormatter()
@@ -44,7 +44,7 @@ struct StudentInformation {
         self.init(objectId: objectId, uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, createdAt: createdAt, updatedAt: updatedAt)
     }
     
-    init(objectId: String, uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, createdAt: NSDate, updatedAt: NSDate) {
+    init(objectId: String?, uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, createdAt: NSDate?, updatedAt: NSDate?) {
         self.objectId = objectId
         self.uniqueKey = uniqueKey
         self.firstName = firstName

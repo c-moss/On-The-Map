@@ -19,13 +19,12 @@ class UdacityClient : ServiceClient {
     }
     
     // create a URL from parameters
-    class func udacityURLFromParameters(parameters: [String:String], withPathExtension: String? = nil) -> NSURL {
+    class func udacityURLFromParameters(withPathExtension: String? = nil, parameters: [String:String] = [String:String]()) -> NSURL {
         return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
     }
     
     func createSession(username: String, password: String, completion: (result: UdacitySession?, error: Error?) -> Void) {
-        let methodParameters = [String:String]()
-        let url = UdacityClient.udacityURLFromParameters(methodParameters, withPathExtension: Methods.Session)
+        let url = UdacityClient.udacityURLFromParameters(Methods.Session)
         
         let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
@@ -53,10 +52,9 @@ class UdacityClient : ServiceClient {
     }
     
     func deleteSession(completion: (result: UdacitySession?, error: Error?) -> Void) {
-        let methodParameters = [String:String]()
         var headers = [String:String]()
 
-        let url = UdacityClient.udacityURLFromParameters(methodParameters, withPathExtension: Methods.Session)
+        let url = UdacityClient.udacityURLFromParameters(Methods.Session)
         
         var xsrfCookie: NSHTTPCookie? = nil
         let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()

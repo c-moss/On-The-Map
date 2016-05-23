@@ -53,14 +53,14 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         
         enterLoadingState {
             self.locationTextView.editable = false
-            self.submitButton.enabled = false
+            self.findButton.enabled = false
         }
         
         let mapSearch = MKLocalSearch(request: mapSearchRequest)
         mapSearch.startWithCompletionHandler { (response, error) in
             self.exitLoadingState {
                 self.locationTextView.editable = true
-                self.submitButton.enabled = true
+                self.findButton.enabled = true
             }
             guard error == nil else {
                 print("Map search error: \(error)")
@@ -103,18 +103,4 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         locationTextView.text = ""
         mapView.removeAnnotations(mapView.annotations)
     }
-    
-//    private func pinMapAndZoom(mapItem: MKMapItem) {
-//        self.mapView.addAnnotation(mapItem.placemark)
-//        
-//        let zoomRegion = MKCoordinateRegionMake(mapItem.placemark.coordinate, MKCoordinateSpanMake(5, 5))
-//        mapView.setRegion(zoomRegion, animated: false)
-//    }
-//    
-//    private func resetUI() {
-//        locationEntryView.hidden = false
-//        locationDetailView.hidden = true
-//        locationTextView.text = ""
-//        mapView.removeAnnotations(mapView.annotations)
-//    }
 }

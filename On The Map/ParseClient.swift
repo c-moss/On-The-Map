@@ -19,13 +19,13 @@ class ParseClient : ServiceClient {
     }
     
     // create a URL from parameters
-    class func parseURLFromParameters(parameters: [String:String], withPathExtension: String? = nil) -> NSURL {
+    class func parseURLFromParameters(withPathExtension: String? = nil, parameters: [String:String] = [String:String]()) -> NSURL {
         return super.urlFromParameters(Constants.ApiScheme, host: Constants.ApiHost, path: Constants.ApiPath, parameters: parameters, withPathExtension: withPathExtension)
     }
     
     func getStudentLocations(completion: (result: [StudentInformation]?, error: Error?) -> Void) {
         let methodParameters = ["limit":"100"]
-        let url = ParseClient.parseURLFromParameters(methodParameters, withPathExtension: Methods.StudentLocation)
+        let url = ParseClient.parseURLFromParameters(Methods.StudentLocation, parameters: methodParameters)
                 
         //TODO: tidy up
         //print("Getting \(url)")
