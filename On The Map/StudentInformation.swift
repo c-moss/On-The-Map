@@ -10,6 +10,14 @@ import Foundation
 
 struct StudentInformation {
     
+    static var dateFormatter: NSDateFormatter {
+        get {
+            let df = NSDateFormatter()
+            df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'S'Z'"
+            return df
+        }
+    }
+    
     var objectId: String?
     var uniqueKey: String
     var firstName: String
@@ -20,24 +28,31 @@ struct StudentInformation {
     var longitude: Float
     var createdAt: NSDate?
     var updatedAt: NSDate?
+    var updatedAtString: String? {
+        get {
+            return (updatedAt != nil) ? StudentInformation.dateFormatter.stringFromDate(updatedAt!) : nil
+        }
+        
+        set(newDate) {
+            updatedAt = (newDate != nil) ? StudentInformation.dateFormatter.dateFromString(newDate!) : nil
+        }
+    }
     
     init(data: [String:AnyObject]) throws {
-        let dateFormatter = NSDateFormatter()
         
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'S'Z'"
         
-        guard let objectId = data[ParseClient.JSONResponseKeys.GetStudentLocation.objectId] as? String,
-            let uniqueKey = data[ParseClient.JSONResponseKeys.GetStudentLocation.uniqueKey] as? String,
-            let firstName = data[ParseClient.JSONResponseKeys.GetStudentLocation.firstName] as? String,
-            let lastName = data[ParseClient.JSONResponseKeys.GetStudentLocation.lastName] as? String,
-            let mapString = data[ParseClient.JSONResponseKeys.GetStudentLocation.mapString] as? String,
-            let mediaURL = data[ParseClient.JSONResponseKeys.GetStudentLocation.mediaURL] as? String,
-            let latitude = data[ParseClient.JSONResponseKeys.GetStudentLocation.latitude] as? Float,
-            let longitude = data[ParseClient.JSONResponseKeys.GetStudentLocation.longitude] as? Float,
-            let createdAtString = data[ParseClient.JSONResponseKeys.GetStudentLocation.createdAt] as? String,
-            let createdAt = dateFormatter.dateFromString(createdAtString),
-            let updatedAtString = data[ParseClient.JSONResponseKeys.GetStudentLocation.updatedAt] as? String,
-            let updatedAt = dateFormatter.dateFromString(updatedAtString) else {
+        guard let objectId = data[ParseClient.JSONResponseKeys.StudentLocation.objectId] as? String,
+            let uniqueKey = data[ParseClient.JSONResponseKeys.StudentLocation.uniqueKey] as? String,
+            let firstName = data[ParseClient.JSONResponseKeys.StudentLocation.firstName] as? String,
+            let lastName = data[ParseClient.JSONResponseKeys.StudentLocation.lastName] as? String,
+            let mapString = data[ParseClient.JSONResponseKeys.StudentLocation.mapString] as? String,
+            let mediaURL = data[ParseClient.JSONResponseKeys.StudentLocation.mediaURL] as? String,
+            let latitude = data[ParseClient.JSONResponseKeys.StudentLocation.latitude] as? Float,
+            let longitude = data[ParseClient.JSONResponseKeys.StudentLocation.longitude] as? Float,
+            let createdAtString = data[ParseClient.JSONResponseKeys.StudentLocation.createdAt] as? String,
+            let createdAt = StudentInformation.dateFormatter.dateFromString(createdAtString),
+            let updatedAtString = data[ParseClient.JSONResponseKeys.StudentLocation.updatedAt] as? String,
+            let updatedAt = StudentInformation.dateFormatter.dateFromString(updatedAtString) else {
                 throw ParseError.DataParsing
         }
         

@@ -88,6 +88,17 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         }
     }
     
+    @IBAction func submitButtonClicked(sender: UIButton) {
+        guard let link = linkTextView.text where !link.isEmpty else {
+            self.showErrorAlert(message: "Please enter a link")
+            return
+        }
+        
+        let model = Model.sharedInstance()
+        
+        //let location = StudentInformation(objectId: nil, uniqueKey: "1234", firstName: , lastName: "o", mapString: <#T##String#>, mediaURL: <#T##String#>, latitude: <#T##Float#>, longitude: <#T##Float#>, createdAt: <#T##NSDate?#>, updatedAt: <#T##NSDate?#>)
+    }
+    
     // Add an annotation pin to the mapView and zoom to show that pin
     private func pinMapAndZoom(mapItem: MKMapItem) {
         self.mapView.addAnnotation(mapItem.placemark)

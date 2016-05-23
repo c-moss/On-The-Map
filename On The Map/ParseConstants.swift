@@ -33,8 +33,8 @@ extension ParseClient {
     // MARK: JSON Response Keys
     struct JSONResponseKeys {
         
-        // MARK: GET StudentLocation
-        struct GetStudentLocation {
+        // MARK: StudentLocation
+        struct StudentLocation {
             static let results : String = "results"
             static let objectId : String = "objectId"
             static let uniqueKey : String = "uniqueKey"

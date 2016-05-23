@@ -10,6 +10,14 @@ import Foundation
 
 struct UdacitySession {
     
+    static var dateFormatter: NSDateFormatter {
+        get {
+            let df = NSDateFormatter()
+            df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'S'Z'"
+            return df
+        }
+    }
+    
     struct accountType {
         var registered: Bool
         var key: String
@@ -26,17 +34,13 @@ struct UdacitySession {
     //class func convertDataWithCompletionHandler(data: AnyObject, completion: (sessionModel: UdacitySession?, error: Error?) -> Void) {
     init(data: [String:AnyObject]) throws {
         
-        let dateFormatter = NSDateFormatter()
-
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'S'Z'"
-        
         guard let accountData = data[UdacityClient.JSONResponseKeys.PostSession.Account] as? [String:AnyObject],
             let accountRegistered = accountData[UdacityClient.JSONResponseKeys.PostSession.AccountRegistered] as? Bool,
             let accountKey = accountData[UdacityClient.JSONResponseKeys.PostSession.AccountKey] as? String,
             let sessionData = data[UdacityClient.JSONResponseKeys.PostSession.Session] as? [String:AnyObject],
             let sessionID = sessionData[UdacityClient.JSONResponseKeys.PostSession.SessionID] as? String,
             let sessionExpirationString = sessionData[UdacityClient.JSONResponseKeys.PostSession.SessionExpiration] as? String,
-            let sessionExpiration = dateFormatter.dateFromString(sessionExpirationString) else {
+            let sessionExpiration = UdacitySession.dateFormatter.dateFromString(sessionExpirationString) else {
                 throw ParseError.DataParsing
         }
         

@@ -43,7 +43,7 @@ class ParseClient : ServiceClient {
                 return
             }
             
-            guard let resultArray = result[ParseClient.JSONResponseKeys.GetStudentLocation.results] as? [[String:AnyObject]] else {
+            guard let resultArray = result[ParseClient.JSONResponseKeys.StudentLocation.results] as? [[String:AnyObject]] else {
                 completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
                 return
             }
@@ -54,6 +54,37 @@ class ParseClient : ServiceClient {
             } catch {
                 completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
             }
+        }
+    }
+    
+    func postStudentLocation(location: StudentInformation, completion: (result: StudentInformation?, error: Error?) -> Void) {
+        let url = ParseClient.parseURLFromParameters(Methods.StudentLocation)
+        
+        let headers = ["X-Parse-Application-Id":Constants.ApplicationID, "X-Parse-REST-API-Key":Constants.ApiKey]
+        
+        let body = "{\"uniqueKey\": \"\(location.uniqueKey)\", \"firstName\": \"\(location.firstName)\", \"lastName\": \"\(location.lastName)\",\"mapString\": \"\(location.mapString)\", \"mediaURL\": \"\(location.mediaURL)\",\"latitude\": \(location.latitude), \"longitude\": \(location.longitude)}"
+        
+        sendHTTPPOSTWithCallback(url, headers: headers, body: body) { (result, error) in
+            guard error == nil else {
+                completion(result: nil, error: error)
+                return
+            }
+            
+            guard let result = result else {
+                completion(result: nil, error: Error(message: "Result was nil"))
+                return
+            }
+            
+            guard let updatedAt = result[ParseClient.JSONResponseKeys.StudentLocation.updatedAt] as? String else {
+                completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
+                return
+            }
+            
+            var updatedLocation = location
+            
+            updatedLocation.updatedAtString = updatedAt
+            
+            completion(result: updatedLocation, error: nil)
         }
     }
 }

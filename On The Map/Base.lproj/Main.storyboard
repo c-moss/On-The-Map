@@ -219,6 +219,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" red="0.2470588235" green="0.4549019608" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitButtonClicked:" destination="WHm-W1-iws" eventType="touchUpInside" id="rKc-Q4-DCG"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIU-c8-uA3">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
