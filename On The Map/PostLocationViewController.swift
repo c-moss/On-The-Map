@@ -80,7 +80,6 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                 return
             }
             
-<<<<<<< HEAD
             dispatch_async(dispatch_get_main_queue()) {
                 self.pinMapAndZoom(response.mapItems[0])
                 self.locationEntryView.hidden = true
@@ -105,17 +104,17 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    private func pinMapAndZoom(mapItem: MKMapItem) {
-        self.mapView.addAnnotation(mapItem.placemark)
-        
-        let zoomRegion = MKCoordinateRegionMake(mapItem.placemark.coordinate, MKCoordinateSpanMake(5, 5))
-        mapView.setRegion(zoomRegion, animated: false)
-    }
-    
-    private func resetUI() {
-        locationEntryView.hidden = false
-        locationDetailView.hidden = true
-        locationTextView.text = ""
-        mapView.removeAnnotations(mapView.annotations)
-    }
+//    private func pinMapAndZoom(mapItem: MKMapItem) {
+//        self.mapView.addAnnotation(mapItem.placemark)
+//        
+//        let zoomRegion = MKCoordinateRegionMake(mapItem.placemark.coordinate, MKCoordinateSpanMake(5, 5))
+//        mapView.setRegion(zoomRegion, animated: false)
+//    }
+//    
+//    private func resetUI() {
+//        locationEntryView.hidden = false
+//        locationDetailView.hidden = true
+//        locationTextView.text = ""
+//        mapView.removeAnnotations(mapView.annotations)
+//    }
 }
