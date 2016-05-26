@@ -75,4 +75,28 @@ class UdacityClient : ServiceClient {
             completion(result: nil, error: nil)
         }
     }
+    
+    func getUserInformation(accountKey: String, completion: (result: UdacityUser?, error: Error?) -> Void) {
+        
+        let url = UdacityClient.udacityURLFromParameters("\(Methods.Users)/\(accountKey)")
+        
+        sendHTTPGETWithCallback(url) { (result, error) in
+            guard error == nil else {
+                completion(result: nil, error: error)
+                return
+            }
+            
+            guard let resultDict = result as? [String:AnyObject] else {
+                completion(result: nil, error: Error(message: "Result was nil"))
+                return
+            }
+            
+            do {
+                let user = try UdacityUser(data: resultDict)
+                completion(result: user, error: nil)
+            } catch {
+                completion(result: nil, error: Error(message: "Error parsing Udacity user data \(resultDict)"))
+            }
+        }
+    }
 }

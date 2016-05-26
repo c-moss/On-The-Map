@@ -38,12 +38,42 @@ class LoginViewController: BaseViewController {
             self.loginButton.enabled = false
         }
         
-        UdacityClient.sharedInstance().createSession(username!, password: password!) { (result, error) in
-            self.exitLoadingState {
-                self.usernameField.enabled = true
-                self.passwordField.enabled = true
-                self.loginButton.enabled = true
+        self.createSession(username!, password: password!) { (success) in
+            if (success) {
+                self.getUserInformation { (success) in
+                    if (success) {
+                        self.getStudentLocations { (success) in
+                            self.exitLoadingState {
+                                self.usernameField.enabled = true
+                                self.passwordField.enabled = true
+                                self.loginButton.enabled = true
+                            }
+                            if (success) {
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self.performSegueWithIdentifier("login", sender: self)
+                                }
+                            }
+                        }
+                    } else {
+                        self.exitLoadingState {
+                            self.usernameField.enabled = true
+                            self.passwordField.enabled = true
+                            self.loginButton.enabled = true
+                        }
+                    }
+                }
+            } else {
+                self.exitLoadingState {
+                    self.usernameField.enabled = true
+                    self.passwordField.enabled = true
+                    self.loginButton.enabled = true
+                }
             }
+        }
+    }
+    
+    private func createSession(username: String, password: String, completion: (Bool) -> Void) {
+        UdacityClient.sharedInstance().createSession(username, password: password) { (result, error) in
             if error != nil {
                 if let statusCode = (error as? HTTPError)?.code {
                     switch statusCode {
@@ -58,47 +88,71 @@ class LoginViewController: BaseViewController {
                     print(error)
                     self.showErrorAlert(message: "There was an error logging in. Please try again")
                 }
+                completion(false)
                 return
             }
             
             guard let result = result else {
                 print("No result returned")
+                completion(false)
                 return
             }
             
             Model.sharedInstance().sessionData = result
             
-            self.enterLoadingState {
-                self.usernameField.enabled = false
-                self.passwordField.enabled = false
-                self.loginButton.enabled = false
+            completion(true)
+        }
+    }
+    
+    private func getUserInformation(completion: (Bool) -> Void) {
+        guard let accountKey = Model.sharedInstance().sessionData?.account.key else {
+            print("Error: Udacity session model does not contain account key: \(Model.sharedInstance().sessionData)")
+            self.showErrorAlert(message: "There was an error logging in. Please try again")
+            completion(false)
+            return
+        }
+        UdacityClient.sharedInstance().getUserInformation(accountKey) { (result, error) in
+            if error != nil {
+                print(error)
+                //TODO: handle this error better - kick back to login screen?
+                self.showErrorAlert(message: "There was an retrieving user data. Please try again")
+                completion(false)
+                return
             }
-            ParseClient.sharedInstance().getStudentLocations() { (result, error) in
-                self.exitLoadingState {
-                    self.usernameField.enabled = true
-                    self.passwordField.enabled = true
-                    self.loginButton.enabled = true
-                }
-                if error != nil {
-                    print(error)
-                    //TODO: handle this error better - kick back to login screen?
-                    self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
-                    return
-                }
-                
-                guard let result = result else {
-                    print("No result returned")
-                    self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
-                    return
-                }
-                
-                Model.sharedInstance().studentInformationData = result
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.performSegueWithIdentifier("login", sender: self)
-                }
-
+            
+            guard let result = result else {
+                print("No result returned")
+                self.showErrorAlert(message: "There was an retrieving user data. Please try again")
+                completion(false)
+                return
             }
+            
+            Model.sharedInstance().userData = result
+            
+            completion(true)
+        }
+    }
+    
+    private func getStudentLocations(completion: (Bool) -> Void) {
+        ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+            if error != nil {
+                print(error)
+                //TODO: handle this error better - kick back to login screen?
+                self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
+                completion(false)
+                return
+            }
+            
+            guard let result = result else {
+                print("No result returned")
+                self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
+                completion(false)
+                return
+            }
+            
+            Model.sharedInstance().studentInformationData = result
+            
+            completion(true)
         }
     }
     

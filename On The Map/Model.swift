@@ -22,6 +22,7 @@ class Model : NSObject {
     }
     
     var sessionData:UdacitySession?
+    var userData:UdacityUser?
     var studentInformationData: [StudentInformation]?
     
     override init() {
