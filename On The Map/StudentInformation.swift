@@ -24,9 +24,18 @@ struct StudentInformation {
     var lastName: String
     var mapString: String
     var mediaURL: String
-    var latitude: Float
-    var longitude: Float
+    var latitude: Double
+    var longitude: Double
     var createdAt: NSDate?
+    var createdAtString: String? {
+        get {
+            return (createdAt != nil) ? StudentInformation.dateFormatter.stringFromDate(createdAt!) : nil
+        }
+        
+        set(newDate) {
+            createdAt = (newDate != nil) ? StudentInformation.dateFormatter.dateFromString(newDate!) : nil
+        }
+    }
     var updatedAt: NSDate?
     var updatedAtString: String? {
         get {
@@ -47,8 +56,8 @@ struct StudentInformation {
             let lastName = data[ParseClient.JSONResponseKeys.StudentLocation.lastName] as? String,
             let mapString = data[ParseClient.JSONResponseKeys.StudentLocation.mapString] as? String,
             let mediaURL = data[ParseClient.JSONResponseKeys.StudentLocation.mediaURL] as? String,
-            let latitude = data[ParseClient.JSONResponseKeys.StudentLocation.latitude] as? Float,
-            let longitude = data[ParseClient.JSONResponseKeys.StudentLocation.longitude] as? Float,
+            let latitude = data[ParseClient.JSONResponseKeys.StudentLocation.latitude] as? Double,
+            let longitude = data[ParseClient.JSONResponseKeys.StudentLocation.longitude] as? Double,
             let createdAtString = data[ParseClient.JSONResponseKeys.StudentLocation.createdAt] as? String,
             let createdAt = StudentInformation.dateFormatter.dateFromString(createdAtString),
             let updatedAtString = data[ParseClient.JSONResponseKeys.StudentLocation.updatedAt] as? String,
@@ -59,7 +68,7 @@ struct StudentInformation {
         self.init(objectId: objectId, uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, createdAt: createdAt, updatedAt: updatedAt)
     }
     
-    init(objectId: String?, uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, createdAt: NSDate?, updatedAt: NSDate?) {
+    init(objectId: String?, uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, createdAt: NSDate?=nil, updatedAt: NSDate?=nil) {
         self.objectId = objectId
         self.uniqueKey = uniqueKey
         self.firstName = firstName

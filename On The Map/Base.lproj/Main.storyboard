@@ -51,7 +51,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-aZ-fIx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentInformationTableViewCell" id="1sw-gi-S0I">
@@ -71,10 +71,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gyI-aZ-fIx" firstAttribute="bottom" secondItem="QS5-Rx-YEW" secondAttribute="bottomMargin" id="4MN-VX-bxe"/>
                             <constraint firstAttribute="trailing" secondItem="gyI-aZ-fIx" secondAttribute="trailing" id="Azn-HP-cKw"/>
-                            <constraint firstItem="gyI-aZ-fIx" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" id="WGP-ua-gDj"/>
+                            <constraint firstItem="gyI-aZ-fIx" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="Pcs-9b-UJ0"/>
                             <constraint firstItem="gyI-aZ-fIx" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="cvo-2H-NiM"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="gyI-aZ-fIx" secondAttribute="bottom" id="j4s-Kb-bxa"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="list" id="cPa-gy-q4n"/>

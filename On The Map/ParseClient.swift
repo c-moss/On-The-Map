@@ -75,14 +75,16 @@ class ParseClient : ServiceClient {
                 return
             }
             
-            guard let updatedAt = result[ParseClient.JSONResponseKeys.StudentLocation.updatedAt] as? String else {
+            guard let createdAt = result[ParseClient.JSONResponseKeys.StudentLocation.createdAt] as? String,
+                let objectId = result[ParseClient.JSONResponseKeys.StudentLocation.objectId] as? String else {
                 completion(result: nil, error: Error(message: "Error parsing StudentLocation data"))
                 return
             }
             
             var updatedLocation = location
             
-            updatedLocation.updatedAtString = updatedAt
+            updatedLocation.createdAtString = createdAt
+            updatedLocation.objectId = objectId
             
             completion(result: updatedLocation, error: nil)
         }

@@ -23,9 +23,13 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var submitButton: UIButton!
     
+    var location: MKMapItem!
+    
     override func viewWillAppear(animated: Bool) {
         findButton.layer.cornerRadius = 10
         submitButton.layer.cornerRadius = 10
+        
+        location = nil
         
         resetUI()
     }
@@ -80,11 +84,13 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                 return
             }
             
+            self.location = response.mapItems[0]
+            
             dispatch_async(dispatch_get_main_queue()) {
-                self.pinMapAndZoom(response.mapItems[0])
+                self.pinMapAndZoom(self.location)
                 self.locationEntryView.hidden = true
                 self.locationDetailView.hidden = false
-                }
+            }
         }
     }
     
@@ -94,9 +100,43 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
             return
         }
         
+        guard let mapString = locationTextView.text where !mapString.isEmpty else {
+            print("Error: location search string was null when posting location")
+            self.showErrorAlert(message: "Please enter a location to search for and retry")
+            return
+        }
+        
+        guard let latitude = self.location.placemark.location?.coordinate.latitude,
+            let longitude = self.location.placemark.location?.coordinate.longitude else {
+                print("Error: Could not access location coordinates")
+                self.showErrorAlert(message: "Please retry location search")
+                return
+        }
+        
         let model = Model.sharedInstance()
         
-        //let location = StudentInformation(objectId: nil, uniqueKey: "1234", firstName: , lastName: "o", mapString: <#T##String#>, mediaURL: <#T##String#>, latitude: <#T##Float#>, longitude: <#T##Float#>, createdAt: <#T##NSDate?#>, updatedAt: <#T##NSDate?#>)
+        let location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
+        
+        enterLoadingState {
+            self.submitButton.enabled = false
+            self.linkTextView.enabled = false
+        }
+        
+        ParseClient.sharedInstance().postStudentLocation(location) { (result, error) in
+            self.exitLoadingState {
+                self.submitButton.enabled = true
+                self.linkTextView.enabled = true
+            }
+            guard error == nil else {
+                print("Error posting student location: \(error)")
+                self.showErrorAlert(message: "Could not post your location - please try again")
+                return
+            }
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
     }
     
     // Add an annotation pin to the mapView and zoom to show that pin
