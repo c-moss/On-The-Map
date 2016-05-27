@@ -52,4 +52,14 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentInformationData.count
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let mediaURLString = studentInformationData[indexPath.row].mediaURL
+        guard let url = NSURL(string: mediaURLString) else {
+            showErrorAlert(message: "Invalid URL: \(mediaURLString)")
+            print("Could not convert \(mediaURLString) to an NSURL")
+            return
+        }
+        UIApplication.sharedApplication().openURL(url)
+    }
 }
