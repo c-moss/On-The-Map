@@ -43,8 +43,8 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         
         /* Set cell defaults */
         cell.textLabel!.text = "\(student.firstName) \(student.lastName)"
-        //cell.imageView!.image = UIImage(named: "Film")
-        //cell.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.imageView!.image = UIImage(named: "pin")
+        cell.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
         
         return cell
     }
