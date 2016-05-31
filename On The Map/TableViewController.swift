@@ -13,11 +13,6 @@ class TableViewController: BaseViewController, DataViewController {
     var studentInformationData = Model.sharedInstance().studentInformationData!
     
     @IBOutlet weak var studentTableView: UITableView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,18 +49,9 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let mediaURLString = studentInformationData[indexPath.row].mediaURL
-        guard let urlComponents = NSURLComponents(string: mediaURLString) else {
-            showErrorAlert(message: "Invalid URL: \(mediaURLString)")
-            print("Could not convert \(mediaURLString) to an NSURL")
-            return
-        }
-        if urlComponents.scheme == nil {
-            urlComponents.scheme = "http"
-        }
-        guard let url = urlComponents.URL else {
-            showErrorAlert(message: "Invalid URL: \(mediaURLString)")
-            print("Could not convert \(mediaURLString) to an NSURL")
+        guard let url = studentInformationData[indexPath.row].validatedURL else {
+            showErrorAlert(message: "Invalid URL: \(studentInformationData[indexPath.row].mediaURL)")
+            print("Could not convert \(studentInformationData[indexPath.row].mediaURL) to an NSURL")
             return
         }
         UIApplication.sharedApplication().openURL(url)

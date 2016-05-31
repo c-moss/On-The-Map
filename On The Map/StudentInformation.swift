@@ -24,6 +24,20 @@ struct StudentInformation {
     var lastName: String
     var mapString: String
     var mediaURL: String
+    var validatedURL: NSURL? {
+        get {
+            guard let urlComponents = NSURLComponents(string: mediaURL) else {
+                return nil
+            }
+            if urlComponents.scheme == nil {
+                urlComponents.scheme = "http"
+            }
+            guard let url = urlComponents.URL else {
+                return nil
+            }
+            return url
+        }
+    }
     var latitude: Double
     var longitude: Double
     var createdAt: NSDate?
