@@ -28,10 +28,11 @@ class MapViewController: BaseViewController, DataViewController, MKMapViewDelega
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let accessoryButton = UIButton(type: UIButtonType.DetailDisclosure)
+        accessoryButton.userInteractionEnabled = false
         let mapAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
         mapAnnotationView.canShowCallout = true
-        mapAnnotationView.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
-        //TODO: figure out how to send clicks on the accessory view button to the callout gesture recognizer
+        mapAnnotationView.rightCalloutAccessoryView = accessoryButton
         return mapAnnotationView
     }
     
