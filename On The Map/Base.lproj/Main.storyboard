@@ -356,9 +356,23 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="udacity" translatesAutoresizingMaskIntoConstraints="NO" id="HvS-Qd-cl8">
                                 <rect key="frame" x="172" y="27" width="216" height="160"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LBu-11-54R"/>
+                                    <constraint firstAttribute="width" constant="40" id="Xhi-NE-lp3"/>
                                     <constraint firstAttribute="height" constant="160" id="s6h-wu-oPR"/>
                                     <constraint firstAttribute="width" constant="160" id="z5g-Fb-q42"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="LBu-11-54R"/>
+                                        <exclude reference="Xhi-NE-lp3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="LBu-11-54R"/>
+                                        <include reference="Xhi-NE-lp3"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLL-az-8zc">
                                 <rect key="frame" x="220" y="195" width="161" height="27"/>
@@ -398,6 +412,7 @@
                         <color key="backgroundColor" red="0.98431372549999996" green="0.34509803919999998" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="vrz-nt-MLz" firstAttribute="height" secondItem="U8t-ZZ-qwB" secondAttribute="height" id="0tt-YY-vDB"/>
+                            <constraint firstItem="nMN-iZ-OR0" firstAttribute="top" secondItem="zLL-az-8zc" secondAttribute="bottom" constant="36" id="4k2-pD-iFb"/>
                             <constraint firstItem="zLL-az-8zc" firstAttribute="centerX" secondItem="ZJP-pK-V4G" secondAttribute="centerX" id="6fi-jg-D2r"/>
                             <constraint firstItem="vrz-nt-MLz" firstAttribute="leading" secondItem="U8t-ZZ-qwB" secondAttribute="leading" id="HOB-Nk-CYv"/>
                             <constraint firstItem="HvS-Qd-cl8" firstAttribute="top" secondItem="Ghq-B9-xIU" secondAttribute="bottom" constant="20" id="JwJ-Sq-rlu"/>
@@ -410,13 +425,23 @@
                             <constraint firstItem="293-z6-reG" firstAttribute="leading" secondItem="c3j-kd-uWU" secondAttribute="trailing" constant="2" id="dwT-UY-gvj"/>
                             <constraint firstItem="vrz-nt-MLz" firstAttribute="width" secondItem="U8t-ZZ-qwB" secondAttribute="width" id="eN6-wE-2k1"/>
                             <constraint firstItem="HvS-Qd-cl8" firstAttribute="centerX" secondItem="ZJP-pK-V4G" secondAttribute="centerX" id="faB-X1-lFX"/>
-                            <constraint firstItem="nMN-iZ-OR0" firstAttribute="top" secondItem="zLL-az-8zc" secondAttribute="bottom" constant="36" id="gPJ-sA-Xeb"/>
+                            <constraint firstItem="nMN-iZ-OR0" firstAttribute="top" secondItem="zLL-az-8zc" secondAttribute="bottom" constant="10" id="gPJ-sA-Xeb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nMN-iZ-OR0" secondAttribute="trailing" id="jGx-fY-BT4"/>
                             <constraint firstItem="U8t-ZZ-qwB" firstAttribute="top" secondItem="nMN-iZ-OR0" secondAttribute="bottom" constant="8" id="n8s-Gh-MzB"/>
                             <constraint firstItem="c3j-kd-uWU" firstAttribute="top" secondItem="vrz-nt-MLz" secondAttribute="bottom" constant="22" id="nIb-lg-K3p"/>
                             <constraint firstItem="U8t-ZZ-qwB" firstAttribute="trailing" secondItem="nMN-iZ-OR0" secondAttribute="trailing" id="qzO-Un-8fO"/>
                             <constraint firstItem="U8t-ZZ-qwB" firstAttribute="leading" secondItem="nMN-iZ-OR0" secondAttribute="leading" id="rlB-kW-kHP"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gPJ-sA-Xeb"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="gPJ-sA-Xeb"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="vrz-nt-MLz" id="mig-el-8gF"/>
