@@ -14,9 +14,22 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    let gradient:CAGradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        gradient.frame = self.view.bounds
+        gradient.colors = [UIColor(red: 0.992, green: 0.525, blue: 0.055, alpha: 1.0).CGColor, UIColor(red: 0.984, green: 0.345, blue: 0.035, alpha: 1.0).CGColor]
+        self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
+        loginButton.layer.cornerRadius = 5
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        gradient.frame = self.view.bounds
+        CATransaction.commit()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,6 +83,10 @@ class LoginViewController: BaseViewController {
                 }
             }
         }
+    }
+    
+    @IBAction func signUpPressed(sender: UIButton) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
     }
     
     private func createSession(username: String, password: String, completion: (Bool) -> Void) {
