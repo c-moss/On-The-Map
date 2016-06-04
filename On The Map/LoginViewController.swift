@@ -40,41 +40,29 @@ class LoginViewController: BaseViewController {
             return
         }
         
-        enterLoadingState {
-            self.usernameField.enabled = false
-            self.passwordField.enabled = false
-            self.loginButton.enabled = false
-        }
+        enterLoadingState({
+                self.usernameField.enabled = false
+                self.passwordField.enabled = false
+                self.loginButton.enabled = false
+            }, exitLoadingTask: {
+                self.usernameField.enabled = true
+                self.passwordField.enabled = true
+                self.loginButton.enabled = true
+            })
         
         self.createSession(username!, password: password!) { (success) in
             if (success) {
                 self.getUserInformation { (success) in
                     if (success) {
                         self.getStudentLocations { (success) in
-                            self.exitLoadingState {
-                                self.usernameField.enabled = true
-                                self.passwordField.enabled = true
-                                self.loginButton.enabled = true
-                            }
+                            self.exitLoadingState()
                             if (success) {
                                 dispatch_async(dispatch_get_main_queue()) {
                                     self.performSegueWithIdentifier("login", sender: self)
                                 }
                             }
                         }
-                    } else {
-                        self.exitLoadingState {
-                            self.usernameField.enabled = true
-                            self.passwordField.enabled = true
-                            self.loginButton.enabled = true
-                        }
                     }
-                }
-            } else {
-                self.exitLoadingState {
-                    self.usernameField.enabled = true
-                    self.passwordField.enabled = true
-                    self.loginButton.enabled = true
                 }
             }
         }

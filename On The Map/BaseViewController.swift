@@ -11,9 +11,13 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    var exitLoadingTask: (() -> Void)?
     
     func showErrorAlert(title: String? = "Error", message: String) {
         dispatch_async(dispatch_get_main_queue()) {
+            if self.exitLoadingTask != nil {
+                self.exitLoadingState()
+            }
             let errorAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) {(UIAlertAction) in
                 errorAlert.dismissViewControllerAnimated(true, completion: nil)
@@ -29,33 +33,23 @@ class BaseViewController: UIViewController {
         return (str == nil) ? false: str!.characters.count > 0
     }
     
-//    func showLoadingIndicator() {
-//        dispatch_async(dispatch_get_main_queue()) {
-//            self.spinner.center = self.view.center
-//            self.spinner.startAnimating()
-//            self.view.addSubview(self.spinner)
-//        }
-//    }
-//    
-//    func hideLoadingIndicator() {
-//        dispatch_async(dispatch_get_main_queue()) {
-//            self.spinner.removeFromSuperview()
-//        }
-//    }
-    
-    func enterLoadingState(tasks: () -> Void) {
+    func enterLoadingState(enterLoadingTask: () -> Void, exitLoadingTask: () -> Void) {
+        self.exitLoadingTask = exitLoadingTask
         dispatch_async(dispatch_get_main_queue()) {
             self.spinner.center = self.view.center
             self.spinner.startAnimating()
             self.view.addSubview(self.spinner)
-            tasks()
+            enterLoadingTask()
         }
     }
     
-    func exitLoadingState(tasks: () -> Void) {
+    func exitLoadingState() {
         dispatch_async(dispatch_get_main_queue()) {
-            tasks()
+            if let task = self.exitLoadingTask {
+                task()
+            }
             self.spinner.removeFromSuperview()
+            self.spinner.stopAnimating()
         }
     }
 }

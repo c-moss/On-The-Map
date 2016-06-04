@@ -55,17 +55,17 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         let mapSearchRequest = MKLocalSearchRequest()
         mapSearchRequest.naturalLanguageQuery = searchQuery
         
-        enterLoadingState {
-            self.locationTextView.editable = false
-            self.findButton.enabled = false
-        }
+        enterLoadingState({
+                self.locationTextView.editable = false
+                self.findButton.enabled = false
+            }, exitLoadingTask: {
+                self.locationTextView.editable = true
+                self.findButton.enabled = true
+            })
         
         let mapSearch = MKLocalSearch(request: mapSearchRequest)
         mapSearch.startWithCompletionHandler { (response, error) in
-            self.exitLoadingState {
-                self.locationTextView.editable = true
-                self.findButton.enabled = true
-            }
+            self.exitLoadingState()
             guard error == nil else {
                 print("Map search error: \(error)")
                 self.showErrorAlert(message: "Could not complete location search - please try again")
@@ -116,13 +116,17 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         let model = Model.sharedInstance()
         let parseClient = ParseClient.sharedInstance()
         
-        enterLoadingState {
-            self.submitButton.enabled = false
-            self.linkTextView.enabled = false
-        }
+        enterLoadingState({
+                self.submitButton.enabled = false
+                self.linkTextView.enabled = false
+            }, exitLoadingTask: {
+                self.submitButton.enabled = true
+                self.linkTextView.enabled = true
+            })
         
         // Query for an existing student location with the specified account key
         parseClient.queryStudentLocation(model.sessionData!.account.key) { (result, error) in
+            
             guard error == nil else {
                 print("Error querying student location: \(error)")
                 self.showErrorAlert(message: "Could not post your location - please try again")
@@ -159,10 +163,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                 }
                 
                 ParseClient.sharedInstance().getStudentLocations() { (result, error) in
-                    self.exitLoadingState {
-                        self.submitButton.enabled = true
-                        self.linkTextView.enabled = true
-                    }
+                    self.exitLoadingState()
                     
                     if error != nil {
                         print(error)

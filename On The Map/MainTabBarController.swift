@@ -16,14 +16,14 @@ class MainTabBarController: UITabBarController {
     
     @IBAction func refreshClicked(sender: UIBarButtonItem) {
         if let currentView = self.selectedViewController as! BaseViewController! {
-            currentView.enterLoadingState {
-                sender.enabled = false
-            }
-            ParseClient.sharedInstance().getStudentLocations() { (result, error) in
-                currentView.exitLoadingState {
+            currentView.enterLoadingState({
+                    sender.enabled = false
+                }, exitLoadingTask: {
                     sender.enabled = true
-                }
-                
+                })
+            ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                currentView.exitLoadingState()
+
                 if error != nil {
                     print(error)
                     //TODO: handle this error better - kick back to login screen?
