@@ -21,9 +21,14 @@ class MapViewController: BaseViewController, DataViewController, MKMapViewDelega
     }
     
     func reloadData() {
-        for student in studentInformationData {
-            let mapAnnotation = StudentAnnotation(student: student)
-            self.mapView.addAnnotation(mapAnnotation)
+        studentInformationData = Model.sharedInstance().studentInformationData!
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            for student in self.studentInformationData {
+                let mapAnnotation = StudentAnnotation(student: student)
+                self.mapView.addAnnotation(mapAnnotation)
+            }
+            self.mapView.setNeedsDisplay()
         }
     }
     

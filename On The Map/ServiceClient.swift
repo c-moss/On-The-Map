@@ -45,6 +45,16 @@ class ServiceClient : NSObject {
         self.sendHTTPRequestWithCallback(URL, method: "POST", headers: postHeaders, body: body, completion: completion)
     }
     
+    func sendHTTPPUTWithCallback(URL: NSURL, headers: [String:String]?=nil, body: String, completion: (result: AnyObject?, error: Error?) -> Void) {
+        var postHeaders = [String:String]()
+        if (headers != nil) {  //set content type headers for JSON
+            postHeaders = headers!
+        }
+        postHeaders["Accept"] = "application/json"
+        postHeaders["Content-Type"] = "application/json"
+        self.sendHTTPRequestWithCallback(URL, method: "PUT", headers: postHeaders, body: body, completion: completion)
+    }
+    
     func sendHTTPDELETEWithCallback(URL: NSURL, headers: [String:String]?=nil, completion: (result: AnyObject?, error: Error?) -> Void) {
         self.sendHTTPRequestWithCallback(URL, method: "DELETE", headers: headers, completion: completion)
     }

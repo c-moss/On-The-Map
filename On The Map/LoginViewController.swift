@@ -32,11 +32,6 @@ class LoginViewController: BaseViewController {
         CATransaction.commit()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func loginPressed(sender: UIButton) {
         let username = usernameField.text
         let password = passwordField.text

@@ -21,7 +21,9 @@ class TableViewController: BaseViewController, DataViewController {
     
     func reloadData() {
         studentInformationData = Model.sharedInstance().studentInformationData!
-        studentTableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+            self.studentTableView.reloadData()
+        }
     }
 
 }
@@ -31,12 +33,10 @@ class TableViewController: BaseViewController, DataViewController {
 extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        /* Get cell type */
         let cellReuseIdentifier = "StudentInformationTableViewCell"
         let student = studentInformationData[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         
-        /* Set cell defaults */
         cell.textLabel!.text = "\(student.firstName) \(student.lastName)"
         cell.imageView!.image = UIImage(named: "pin")
         cell.imageView!.contentMode = UIViewContentMode.ScaleAspectFit

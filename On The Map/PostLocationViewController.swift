@@ -114,29 +114,75 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         }
         
         let model = Model.sharedInstance()
-        
-        let location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
+        let parseClient = ParseClient.sharedInstance()
         
         enterLoadingState {
             self.submitButton.enabled = false
             self.linkTextView.enabled = false
         }
         
-        ParseClient.sharedInstance().postStudentLocation(location) { (result, error) in
-            self.exitLoadingState {
-                self.submitButton.enabled = true
-                self.linkTextView.enabled = true
-            }
+        parseClient.queryStudentLocation(model.sessionData!.account.key) { (result, error) in
             guard error == nil else {
-                print("Error posting student location: \(error)")
+                print("Error querying student location: \(error)")
                 self.showErrorAlert(message: "Could not post your location - please try again")
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
-                self.dismissViewControllerAnimated(true, completion: nil)
+            guard let result = result else {
+                print("No result object from querying student location")
+                self.showErrorAlert(message: "Could not post your location - please try again")
+                return
+            }
+            
+            var submitLocationFunction: (StudentInformation, (result: StudentInformation?, error: Error?) -> Void) -> Void
+            var location: StudentInformation
+            
+            if result.isEmpty {
+                submitLocationFunction = parseClient.postStudentLocation
+                location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
+            } else {
+                submitLocationFunction = parseClient.updateStudentLocation
+                location = result[0]
+                location.mapString = mapString
+                location.mediaURL = link
+                location.latitude = latitude
+                location.longitude = longitude
+            }
+            
+            submitLocationFunction(location) { (result, error) in
+                self.exitLoadingState {
+                    self.submitButton.enabled = true
+                    self.linkTextView.enabled = true
+                }
+                guard error == nil else {
+                    print("Error submitting student location: \(error)")
+                    self.showErrorAlert(message: "Could not submit your location - please try again")
+                    return
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
             }
         }
+        
+//        let location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
+//        
+//        ParseClient.sharedInstance().postStudentLocation(location) { (result, error) in
+//            self.exitLoadingState {
+//                self.submitButton.enabled = true
+//                self.linkTextView.enabled = true
+//            }
+//            guard error == nil else {
+//                print("Error posting student location: \(error)")
+//                self.showErrorAlert(message: "Could not post your location - please try again")
+//                return
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue()) {
+//                self.dismissViewControllerAnimated(true, completion: nil)
+//            }
+//        }
     }
     
     // Add an annotation pin to the mapView and zoom to show that pin
