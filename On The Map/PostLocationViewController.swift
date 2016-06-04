@@ -121,6 +121,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
             self.linkTextView.enabled = false
         }
         
+        // Query for an existing student location with the specified account key
         parseClient.queryStudentLocation(model.sessionData!.account.key) { (result, error) in
             guard error == nil else {
                 print("Error querying student location: \(error)")
@@ -137,10 +138,10 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
             var submitLocationFunction: (StudentInformation, (result: StudentInformation?, error: Error?) -> Void) -> Void
             var location: StudentInformation
             
-            if result.isEmpty {
+            if result.isEmpty { // if no existing locations were found, POST a new one
                 submitLocationFunction = parseClient.postStudentLocation
                 location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
-            } else {
+            } else {    // if an existing location was found, PUT an update to it
                 submitLocationFunction = parseClient.updateStudentLocation
                 location = result[0]
                 location.mapString = mapString
@@ -149,40 +150,41 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                 location.longitude = longitude
             }
             
+            //Submit the location
             submitLocationFunction(location) { (result, error) in
-                self.exitLoadingState {
-                    self.submitButton.enabled = true
-                    self.linkTextView.enabled = true
-                }
                 guard error == nil else {
                     print("Error submitting student location: \(error)")
                     self.showErrorAlert(message: "Could not submit your location - please try again")
                     return
                 }
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                ParseClient.sharedInstance().getStudentLocations() { (result, error) in
+                    self.exitLoadingState {
+                        self.submitButton.enabled = true
+                        self.linkTextView.enabled = true
+                    }
+                    
+                    if error != nil {
+                        print(error)
+                        //TODO: handle this error better - kick back to login screen?
+                        self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
+                        return
+                    }
+                    
+                    guard let result = result else {
+                        print("No result returned")
+                        self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
+                        return
+                    }
+                    
+                    Model.sharedInstance().studentInformationData = result
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }
                 }
             }
         }
-        
-//        let location = StudentInformation(objectId: nil, uniqueKey: model.sessionData!.account.key, firstName: model.userData!.firstName, lastName: model.userData!.lastName, mapString: mapString, mediaURL: link, latitude: latitude, longitude: longitude)
-//        
-//        ParseClient.sharedInstance().postStudentLocation(location) { (result, error) in
-//            self.exitLoadingState {
-//                self.submitButton.enabled = true
-//                self.linkTextView.enabled = true
-//            }
-//            guard error == nil else {
-//                print("Error posting student location: \(error)")
-//                self.showErrorAlert(message: "Could not post your location - please try again")
-//                return
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue()) {
-//                self.dismissViewControllerAnimated(true, completion: nil)
-//            }
-//        }
     }
     
     // Add an annotation pin to the mapView and zoom to show that pin
