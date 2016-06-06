@@ -46,7 +46,13 @@ class ParseClient : ServiceClient {
             }
             
             do {
-                let studentLocations = try resultArray.map() {try StudentInformation(data: $0)}
+                var studentLocations = try resultArray.map() {try StudentInformation(data: $0)}
+                
+                // Sort student locations by descending updated date
+                studentLocations = studentLocations.sort({ (s1, s2) -> Bool in
+                    return s1.updatedAt!.compare(s2.updatedAt!) == NSComparisonResult.OrderedDescending
+                })
+                
                 completion(result: studentLocations, error: nil)
             } catch {
                 completion(result: nil, error: Error(message: "Error parsing getStudentLocations response data: \(result)"))
