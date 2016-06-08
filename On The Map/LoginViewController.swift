@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: BaseViewController {
+class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -30,6 +30,16 @@ class LoginViewController: BaseViewController {
         CATransaction.setDisableActions(true)
         gradient.frame = self.view.bounds
         CATransaction.commit()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == usernameField) {
+            passwordField.becomeFirstResponder()
+        } else if (textField == passwordField) {
+            passwordField.resignFirstResponder()
+            loginPressed(loginButton)
+        }
+        return true
     }
     
     @IBAction func loginPressed(sender: UIButton) {

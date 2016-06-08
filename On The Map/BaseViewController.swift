@@ -13,6 +13,16 @@ class BaseViewController: UIViewController {
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     var exitLoadingTask: (() -> Void)?
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    func hideKeyboard(recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     func showErrorAlert(title: String? = "Error", message: String) {
         dispatch_async(dispatch_get_main_queue()) {
             if self.exitLoadingTask != nil {

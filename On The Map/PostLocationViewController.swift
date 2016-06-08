@@ -33,7 +33,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         
         resetUI()
     }
-    
+        
     // MARK: fake placeholder for UITextView
     func textViewDidBeginEditing(textView: UITextView) {
         locationPlaceholder.hidden = true
