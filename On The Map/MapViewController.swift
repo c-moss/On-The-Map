@@ -43,8 +43,7 @@ class MapViewController: BaseViewController, DataViewController, MKMapViewDelega
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         //add a tap gesture recognizer so that taps on the callout can be detected
-        //TODO: upgrade to XCode 7.3 and use the new #selector syntax
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "calloutTapped:")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(calloutTapped))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
