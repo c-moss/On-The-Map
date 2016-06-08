@@ -107,26 +107,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQi-2y-C5Y">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G3z-uf-ADB">
-                                        <rect key="frame" x="0.0" y="192" width="600" height="287"/>
-                                        <color key="backgroundColor" red="0.24705882352941178" green="0.45490196078431372" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="WHm-W1-iws" id="mlJ-ya-sEo"/>
-                                        </connections>
-                                    </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter your location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-1K-wWP">
-                                        <rect key="frame" x="0.0" y="192" width="600" height="39"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="cGw-a2-4Cf"/>
-                                            <constraint firstAttribute="height" constant="40" id="v59-Gc-HcX"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMc-n0-az3">
                                         <rect key="frame" x="205" y="0.0" width="184" height="184"/>
                                         <constraints>
@@ -193,23 +173,30 @@
                                             <action selector="findButtonClicked:" destination="WHm-W1-iws" eventType="touchUpInside" id="ZKy-AS-Vtd"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="Enter your location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LDT-cx-jyT">
+                                        <rect key="frame" x="0.0" y="192" width="600" height="306"/>
+                                        <color key="backgroundColor" red="0.2470588235" green="0.4549019608" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="WHm-W1-iws" id="qNx-I1-0Iq"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="bNa-1K-wWP" firstAttribute="leading" secondItem="G3z-uf-ADB" secondAttribute="leading" id="16T-9x-qYJ"/>
-                                    <constraint firstItem="G3z-uf-ADB" firstAttribute="leading" secondItem="CQi-2y-C5Y" secondAttribute="leading" id="5Re-Zf-YRL"/>
+                                    <constraint firstItem="LDT-cx-jyT" firstAttribute="top" secondItem="zMc-n0-az3" secondAttribute="bottom" id="4dn-ww-Cu1"/>
+                                    <constraint firstItem="5lk-N3-J0X" firstAttribute="top" secondItem="LDT-cx-jyT" secondAttribute="bottom" constant="40" id="7Fj-Nz-N0Y"/>
                                     <constraint firstItem="5lk-N3-J0X" firstAttribute="centerX" secondItem="CQi-2y-C5Y" secondAttribute="centerX" id="995-U1-ICL"/>
-                                    <constraint firstAttribute="trailing" secondItem="G3z-uf-ADB" secondAttribute="trailing" id="DDa-W3-b3z"/>
-                                    <constraint firstItem="bNa-1K-wWP" firstAttribute="top" secondItem="G3z-uf-ADB" secondAttribute="top" id="Iar-ua-tjz"/>
                                     <constraint firstItem="zMc-n0-az3" firstAttribute="top" secondItem="CQi-2y-C5Y" secondAttribute="top" id="Qsi-ge-Ucz"/>
-                                    <constraint firstItem="bNa-1K-wWP" firstAttribute="trailing" secondItem="G3z-uf-ADB" secondAttribute="trailing" id="Rrj-aP-P8R"/>
-                                    <constraint firstItem="5lk-N3-J0X" firstAttribute="top" secondItem="G3z-uf-ADB" secondAttribute="bottom" constant="40" id="j1k-ow-YA9"/>
+                                    <constraint firstItem="LDT-cx-jyT" firstAttribute="leading" secondItem="CQi-2y-C5Y" secondAttribute="leading" id="f2e-JI-FxC"/>
                                     <constraint firstItem="zMc-n0-az3" firstAttribute="centerX" secondItem="CQi-2y-C5Y" secondAttribute="centerX" id="mqM-ye-yYp"/>
-                                    <constraint firstItem="G3z-uf-ADB" firstAttribute="top" secondItem="zMc-n0-az3" secondAttribute="bottom" id="tDw-WU-FaU"/>
                                     <constraint firstAttribute="bottom" secondItem="5lk-N3-J0X" secondAttribute="bottom" constant="40" id="tWD-03-r6E"/>
+                                    <constraint firstAttribute="trailing" secondItem="LDT-cx-jyT" secondAttribute="trailing" id="tqn-wx-D0w"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wde-MV-yrx">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wde-MV-yrx">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-fs-pzc">
@@ -239,7 +226,10 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="WHm-W1-iws" id="xdd-wE-h3o"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.2470588235" green="0.4549019608" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -286,6 +276,7 @@
                             <constraint firstItem="L2L-uL-6oK" firstAttribute="leading" secondItem="5lk-N3-J0X" secondAttribute="leading" id="AIH-Mk-STe"/>
                             <constraint firstItem="oeb-kh-HS1" firstAttribute="trailing" secondItem="0NO-WD-bSD" secondAttribute="trailingMargin" id="ApQ-oY-31P"/>
                             <constraint firstItem="3Ia-sF-LUm" firstAttribute="top" secondItem="Wde-MV-yrx" secondAttribute="bottom" id="CAm-69-Xlc"/>
+                            <constraint firstItem="eep-BD-GHD" firstAttribute="top" secondItem="LDT-cx-jyT" secondAttribute="bottom" id="CRH-kg-axa"/>
                             <constraint firstItem="L2L-uL-6oK" firstAttribute="width" secondItem="5lk-N3-J0X" secondAttribute="width" id="LcP-QG-w6c"/>
                             <constraint firstItem="Wde-MV-yrx" firstAttribute="leading" secondItem="0NO-WD-bSD" secondAttribute="leading" id="ReX-un-NUf"/>
                             <constraint firstItem="L2L-uL-6oK" firstAttribute="top" secondItem="5lk-N3-J0X" secondAttribute="top" id="Wa0-in-WqA"/>
@@ -293,7 +284,6 @@
                             <constraint firstItem="3Ia-sF-LUm" firstAttribute="top" secondItem="CQi-2y-C5Y" secondAttribute="bottom" id="gNL-wE-fHb"/>
                             <constraint firstItem="Wde-MV-yrx" firstAttribute="top" secondItem="0NO-WD-bSD" secondAttribute="top" id="hbh-AB-rZd"/>
                             <constraint firstItem="CQi-2y-C5Y" firstAttribute="leading" secondItem="0NO-WD-bSD" secondAttribute="leading" id="l8t-zy-U6c"/>
-                            <constraint firstItem="eep-BD-GHD" firstAttribute="top" secondItem="G3z-uf-ADB" secondAttribute="bottom" id="mik-ed-PmJ"/>
                             <constraint firstItem="oeb-kh-HS1" firstAttribute="top" secondItem="YKr-TL-KEs" secondAttribute="bottom" id="oNW-nk-bC0"/>
                             <constraint firstAttribute="trailing" secondItem="CQi-2y-C5Y" secondAttribute="trailing" id="s17-uP-JGo"/>
                             <constraint firstAttribute="trailing" secondItem="Wde-MV-yrx" secondAttribute="trailing" id="tPL-AJ-sPl"/>
@@ -303,9 +293,8 @@
                         <outlet property="findButton" destination="5lk-N3-J0X" id="94U-dJ-urj"/>
                         <outlet property="linkTextView" destination="Lee-qL-spn" id="VYf-jY-ufs"/>
                         <outlet property="locationDetailView" destination="Wde-MV-yrx" id="oYJ-ev-BCA"/>
-                        <outlet property="locationEntryView" destination="CQi-2y-C5Y" id="Iyg-nE-kVf"/>
-                        <outlet property="locationPlaceholder" destination="bNa-1K-wWP" id="sgd-s6-J2Z"/>
-                        <outlet property="locationTextView" destination="G3z-uf-ADB" id="mgp-4m-Gwh"/>
+                        <outlet property="locationEntryView" destination="CQi-2y-C5Y" id="xgg-98-5rD"/>
+                        <outlet property="locationTextField" destination="LDT-cx-jyT" id="gfP-5S-5bb"/>
                         <outlet property="mapView" destination="qcs-fs-pzc" id="ZLa-5j-n7C"/>
                         <outlet property="submitButton" destination="L2L-uL-6oK" id="sXn-zo-cpL"/>
                     </connections>

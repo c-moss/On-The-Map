@@ -9,12 +9,11 @@
 import UIKit
 import MapKit
 
-class PostLocationViewController: BaseViewController, UITextViewDelegate {
+class PostLocationViewController: BaseViewController, UITextFieldDelegate {
     
     // MARK: First location view
     @IBOutlet weak var locationEntryView: UIView!
-    @IBOutlet weak var locationTextView: UITextView!
-    @IBOutlet weak var locationPlaceholder: UILabel!
+    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var findButton: UIButton!
     
     // MARK: Second location view
@@ -33,13 +32,16 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         
         resetUI()
     }
-        
-    // MARK: fake placeholder for UITextView
-    func textViewDidBeginEditing(textView: UITextView) {
-        locationPlaceholder.hidden = true
-    }
-    func textViewDidEndEditing(textView: UITextView) {
-        locationPlaceholder.hidden = textView.hasText()
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == locationTextField) {
+            textField.resignFirstResponder()
+            findButtonClicked(findButton)
+        } else if (textField == linkTextView) {
+            textField.resignFirstResponder()
+            submitButtonClicked(submitButton)
+        }
+        return true
     }
     
     @IBAction func cancelButtonClicked(sender: UIButton) {
@@ -47,7 +49,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
     }
     
     @IBAction func findButtonClicked(sender: UIButton) {
-        guard let searchQuery = locationTextView.text where !searchQuery.isEmpty else {
+        guard let searchQuery = locationTextField.text where !searchQuery.isEmpty else {
             self.showErrorAlert(message: "Please enter a location search term")
             return
         }
@@ -56,10 +58,10 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
         mapSearchRequest.naturalLanguageQuery = searchQuery
         
         enterLoadingState({
-                self.locationTextView.editable = false
+                self.locationTextField.enabled = false
                 self.findButton.enabled = false
             }, exitLoadingTask: {
-                self.locationTextView.editable = true
+                self.locationTextField.enabled = true
                 self.findButton.enabled = true
             })
         
@@ -100,7 +102,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
             return
         }
         
-        guard let mapString = locationTextView.text where !mapString.isEmpty else {
+        guard let mapString = locationTextField.text where !mapString.isEmpty else {
             print("Error: location search string was null when posting location")
             self.showErrorAlert(message: "Please enter a location to search for and retry")
             return
@@ -199,7 +201,7 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
     private func resetUI() {
         locationEntryView.hidden = false
         locationDetailView.hidden = true
-        locationTextView.text = ""
+        locationTextField.text = ""
         mapView.removeAnnotations(mapView.annotations)
     }
 }
