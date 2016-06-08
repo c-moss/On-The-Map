@@ -28,9 +28,6 @@ class UdacityClient : ServiceClient {
         
         let body = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
-        //TODO: tidy up
-        //print("Sending \(body) to \(url)")
-        
         sendHTTPPOSTWithCallback(url, body: body) { (result, error) in
             guard error == nil else {
                 completion(result: nil, error: error)

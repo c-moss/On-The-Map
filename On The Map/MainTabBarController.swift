@@ -26,7 +26,6 @@ class MainTabBarController: UITabBarController {
 
                 if error != nil {
                     print(error)
-                    //TODO: handle this error better - kick back to login screen?
                     currentView.showErrorAlert(message: "There was an retrieving student location data. Please try again")
                     return
                 }

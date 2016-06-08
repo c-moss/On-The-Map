@@ -114,7 +114,6 @@ class LoginViewController: BaseViewController {
         UdacityClient.sharedInstance().getUserInformation(accountKey) { (result, error) in
             if error != nil {
                 print(error)
-                //TODO: handle this error better - kick back to login screen?
                 self.showErrorAlert(message: "There was an retrieving user data. Please try again")
                 completion(false)
                 return
@@ -137,7 +136,6 @@ class LoginViewController: BaseViewController {
         ParseClient.sharedInstance().getStudentLocations() { (result, error) in
             if error != nil {
                 print(error)
-                //TODO: handle this error better - kick back to login screen?
                 self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
                 completion(false)
                 return

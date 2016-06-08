@@ -167,7 +167,6 @@ class PostLocationViewController: BaseViewController, UITextViewDelegate {
                     
                     if error != nil {
                         print(error)
-                        //TODO: handle this error better - kick back to login screen?
                         self.showErrorAlert(message: "There was an retrieving student location data. Please try again")
                         return
                     }
