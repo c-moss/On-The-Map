@@ -1,2 +1,2 @@
 # On-The-Map
-[test link](http://www.google.com)
+[test link](/Vacasa/mobile-gateway-api/blob/master/doc/configure.md)
